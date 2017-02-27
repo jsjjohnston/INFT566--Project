@@ -2,6 +2,7 @@
 
 #include <Catch\catch.hpp>
 #include "Application.h"
+#include "TimeManager.h"
 
 
 TEST_CASE("Window creation", "[Application]") {
@@ -121,6 +122,25 @@ TEST_CASE("Run", "[Application]")
 	app->run("TestCase Window", 800, 600, false);
 	REQUIRE(app->getWindowPtr() != nullptr);
 }
+
+TEST_CASE("Create", "[TimeManager]")
+{
+	REQUIRE(TimeManager::m_instance == nullptr);
+	TimeManager::create();
+	REQUIRE(TimeManager::m_instance != nullptr);
+}
+
+TEST_CASE("UpdateDeltaTime", "[TimeManager]")
+{
+	TimeManager::create();
+	REQUIRE(TimeManager::getInstance()->getDeltaTime() == 0.0f);
+	TimeManager::getInstance()->updateDeltaTime();
+	REQUIRE(TimeManager::getInstance()->getDeltaTime() != 0.0f);
+	float time = TimeManager::getInstance()->getDeltaTime();
+	TimeManager::getInstance()->updateDeltaTime();
+	REQUIRE_FALSE(TimeManager::getInstance()->getDeltaTime() == time);
+}
+
 
 #endif // CATCH_CONFIG_MAIN
 

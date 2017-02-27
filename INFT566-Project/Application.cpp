@@ -106,7 +106,7 @@ float Application::getTime() const
 
 void Application::run(const char * a_title, int a_width, int a_height, bool a_fullscreen)
 {
-	if (createWindow(a_title, a_width, a_height, a_fullscreen) /*//TODO Include && startup()*/)
+	if (createWindow(a_title, a_width, a_height, a_fullscreen) /*TODO Include && startup()*/)
 	{
 		//TODO Finish
 	}

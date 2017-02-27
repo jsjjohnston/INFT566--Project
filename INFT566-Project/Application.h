@@ -4,7 +4,7 @@
 #include <GLFW/glfw3.h>
 
 /*
-	//TODO Ensure upto date
+	NOTE Ensure upto date
 	Application
 	Author: Jay Johnstonm
 	Discription: Used as a base class for new scenes
