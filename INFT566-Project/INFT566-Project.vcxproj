@@ -150,12 +150,14 @@
   <ItemGroup>
     <ClCompile Include="..\include\AIE\Gizmos.cpp" />
     <ClCompile Include="..\include\GLM\gl_core_4_4.c" />
+    <ClCompile Include="Application.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\AIE\Gizmos.h" />
     <ClInclude Include="..\include\Catch\catch.hpp" />
     <ClInclude Include="..\include\GLM\gl_core_4_4.h" />
+    <ClInclude Include="Application.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
