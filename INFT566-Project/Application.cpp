@@ -108,7 +108,36 @@ void Application::run(const char * a_title, int a_width, int a_height, bool a_fu
 {
 	if (createWindow(a_title, a_width, a_height, a_fullscreen) /*TODO Include && startup()*/)
 	{
-		//TODO Finish
+		// Check if time Manager hasnt been initailised
+		if (TimeManager::getInstance() == nullptr)
+		{
+			std::cout << "Time Manage has not been initialised" << std::endl;
+			TimeManager::create();
+		}
+
+		while (!m_isGameOver)
+		{
+			
+			TimeManager::getInstance()->updateDeltaTime();
+
+			// Update window events
+			glfwPollEvents();
+
+			if (glfwGetWindowAttrib(m_window, GLFW_ICONIFIED) != 0)
+				continue;
+			
+			//TODO update(float(TimeManager::getInstance()->getDeltaTime()));
+			
+			//present backbuffer to the monitor
+			glfwSwapBuffers(m_window);
+
+			// Should the game exit?
+			m_isGameOver = m_isGameOver || glfwWindowShouldClose(m_window) == GLFW_TRUE;
+		}
+
+		// Clean up when game is over
+		// TODO shutdown();
+		destroyWindow();
 	}
 }
 

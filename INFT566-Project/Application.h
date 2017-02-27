@@ -2,6 +2,7 @@
 
 #include <gl_core_4_4.h>
 #include <GLFW/glfw3.h>
+#include "TimeManager.h"
 
 /*
 	NOTE Ensure upto date
