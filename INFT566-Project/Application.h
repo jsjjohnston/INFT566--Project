@@ -4,7 +4,7 @@
 #include <GLFW/glfw3.h>
 
 /*
-	TODO Ensure upto date
+	//TODO Ensure upto date
 	Application
 	Author: Jay Johnstonm
 	Discription: Used as a base class for new scenes
@@ -31,13 +31,22 @@ public:
 	// Wipes the screen clear to begin a frame of drawing
 	void clearScreen();
 
-	// These functions must be implemented by a child class
+	// TODO Implement
+	//These functions must be implemented by a child class
 	//virtual bool startup() = 0;
 	//virtual void shutdown() = 0;
 	//virtual void update(float deltaTime) = 0;
 	//virtual void draw() = 0;
 
 	void endGame() { m_isGameOver = true; };
+
+	// Returns time since application started
+	float getTime() const;
+
+	// Creates a window and begins the game loop which calls update() and draw()repeatedly
+	// It first calls startup() and if that succeeds it then starts the loop,
+	// Ending with shutdown() if m_gameOver is true
+	void run(const char* a_title, int a_width, int a_height, bool a_fullscreen);
 
 #ifdef CATCH_CONFIG_MAIN
 	/*

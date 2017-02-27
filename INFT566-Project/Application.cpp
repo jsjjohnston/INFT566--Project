@@ -99,3 +99,16 @@ void Application::clearScreen()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
+float Application::getTime() const
+{
+	return (float) glfwGetTime();
+}
+
+void Application::run(const char * a_title, int a_width, int a_height, bool a_fullscreen)
+{
+	if (createWindow(a_title, a_width, a_height, a_fullscreen) /*//TODO Include && startup()*/)
+	{
+		//TODO Finish
+	}
+}
+
