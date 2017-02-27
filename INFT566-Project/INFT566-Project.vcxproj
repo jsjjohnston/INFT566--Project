@@ -212,6 +212,7 @@
     <ClCompile Include="..\include\AIE\Gizmos.cpp" />
     <ClCompile Include="..\include\GLM\gl_core_4_4.c" />
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Glslprogram.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Project.cpp" />
     <ClCompile Include="testCase.cpp" />
@@ -222,6 +223,7 @@
     <ClInclude Include="..\include\Catch\catch.hpp" />
     <ClInclude Include="..\include\GLM\gl_core_4_4.h" />
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Glslprogram.h" />
     <ClInclude Include="Project.h" />
     <ClInclude Include="TimeManager.h" />
   </ItemGroup>

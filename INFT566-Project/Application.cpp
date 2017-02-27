@@ -136,7 +136,7 @@ void Application::run(const char * a_title, int a_width, int a_height, bool a_fu
 		}
 
 		// Clean up when game is over
-		// TODO shutdown();
+		shutdown();
 		destroyWindow();
 	}
 }

@@ -5,10 +5,6 @@
 #include <GLFW\glfw3.h>
 
 
-TEST_CASE("Window creation", "[Project]") {
-
-}
-
 TEST_CASE("Create", "[TimeManager]")
 {
 	REQUIRE(TimeManager::m_instance == nullptr);
