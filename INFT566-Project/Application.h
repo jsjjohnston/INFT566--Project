@@ -32,7 +32,7 @@ public:
 	// Wipes the screen clear to begin a frame of drawing
 	void clearScreen();
 
-	// TODO Implement
+	TODO Implement
 	//These functions must be implemented by a child class
 	//virtual bool startup() = 0;
 	//virtual void shutdown() = 0;
