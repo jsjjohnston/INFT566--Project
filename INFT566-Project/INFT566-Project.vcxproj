@@ -213,6 +213,7 @@
     <ClCompile Include="..\include\GLM\gl_core_4_4.c" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Project.cpp" />
     <ClCompile Include="testCase.cpp" />
     <ClCompile Include="TimeManager.cpp" />
   </ItemGroup>
@@ -221,6 +222,7 @@
     <ClInclude Include="..\include\Catch\catch.hpp" />
     <ClInclude Include="..\include\GLM\gl_core_4_4.h" />
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Project.h" />
     <ClInclude Include="TimeManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -32,12 +32,11 @@ public:
 	// Wipes the screen clear to begin a frame of drawing
 	void clearScreen();
 
-	TODO Implement
 	//These functions must be implemented by a child class
-	//virtual bool startup() = 0;
-	//virtual void shutdown() = 0;
-	//virtual void update(float deltaTime) = 0;
-	//virtual void draw() = 0;
+	virtual bool startup() = 0;
+	virtual void shutdown() = 0;
+	virtual void update(float deltaTime) = 0;
+	virtual void draw() = 0;
 
 	void endGame() { m_isGameOver = true; };
 

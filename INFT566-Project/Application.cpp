@@ -126,7 +126,7 @@ void Application::run(const char * a_title, int a_width, int a_height, bool a_fu
 			if (glfwGetWindowAttrib(m_window, GLFW_ICONIFIED) != 0)
 				continue;
 			
-			//TODO update(float(TimeManager::getInstance()->getDeltaTime()));
+			update(float(TimeManager::getInstance()->getDeltaTime()));
 			
 			//present backbuffer to the monitor
 			glfwSwapBuffers(m_window);
