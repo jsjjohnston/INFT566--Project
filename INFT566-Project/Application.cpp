@@ -1,7 +1,5 @@
 #include "Application.h"
 
-
-
 Application::Application() : m_window(nullptr), m_isGameOver(false)
 {
 }
