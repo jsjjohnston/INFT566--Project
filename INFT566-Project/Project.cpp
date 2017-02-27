@@ -13,7 +13,7 @@ Project::~Project()
 
 bool Project::startup()
 {
-	return false;
+	return true;
 }
 
 void Project::shutdown()
