@@ -10,6 +10,11 @@ public:
 	Project();
 	~Project();
 
+	virtual bool startup();
+	virtual void shutdown();
+	virtual void update(float deltaTime);
+	virtual void draw();
+
 protected:
 
 private:
