@@ -3,6 +3,7 @@
 #include <Catch\catch.hpp>
 #include "TimeManager.h"
 #include <GLFW\glfw3.h>
+#include "Model.h"
 
 
 TEST_CASE("Create", "[TimeManager]")
@@ -26,6 +27,10 @@ TEST_CASE("UpdateDeltaTime", "[TimeManager]")
 	glfwTerminate();
 }
 
+TEST_CASE("Model", "[TinyOBJ]")
+{
+	auto model = new Model();
+}
 
 #endif // CATCH_CONFIG_MAIN
 

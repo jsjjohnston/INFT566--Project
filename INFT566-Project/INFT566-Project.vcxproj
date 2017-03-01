@@ -218,9 +218,11 @@
     <ClCompile Include="Glslprogram.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="Project.cpp" />
     <ClCompile Include="testCase.cpp" />
     <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="tiny_obj_loader.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\AIE\Gizmos.h" />
@@ -232,8 +234,13 @@
     <ClInclude Include="GameOBJ.h" />
     <ClInclude Include="Glslprogram.h" />
     <ClInclude Include="Grid.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="Primitives\OBJVertex.h" />
+    <ClInclude Include="Primitives\OpenGLInfo.h" />
+    <ClInclude Include="Primitives\Vertex.h" />
     <ClInclude Include="Project.h" />
     <ClInclude Include="TimeManager.h" />
+    <ClInclude Include="tiny_obj_loader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

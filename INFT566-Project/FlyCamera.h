@@ -1,7 +1,7 @@
 #pragma once
 #include "Cameras.h"
 #include "GLFW\glfw3.h"
-
+// TODO Remake Fly Camera
 class FlyCamera :
 	public Cameras
 {

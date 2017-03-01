@@ -25,9 +25,6 @@ public:
 protected:
 
 private:
-#ifdef DEBUG
-	FlyCamera* m_flyCamera;
-#endif // DEBUG
 
 	Grid* m_grid;
 };
