@@ -22,8 +22,6 @@ public:
 	void setProjectionView(const glm::mat4 a_projectionView);
 
 	//Set up the Grid
-	virtual void startup();
-	virtual void shutdown();
 	virtual void update(float deltaTime);
 	virtual void draw();
 

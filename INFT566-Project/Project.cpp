@@ -8,12 +8,12 @@ Project::Project(): m_grid(nullptr)
 
 Project::~Project()
 {
+	delete m_grid;
 }
 
 bool Project::startup()
 {
 	m_grid = new Grid();
-	m_grid->startup();
 #ifdef DEBUG
 	m_flyCamera = new FlyCamera();
 	m_flyCamera->setWindow(m_window);
@@ -33,7 +33,7 @@ bool Project::startup()
 
 void Project::shutdown()
 {
-	m_grid->shutdown();
+
 }
 
 void Project::update(float deltaTime)

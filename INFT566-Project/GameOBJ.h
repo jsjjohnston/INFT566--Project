@@ -12,8 +12,7 @@ public:
 	GameOBJ();
 	~GameOBJ();
 
-	virtual void startup() = 0;
-	virtual void shutdown() = 0;
+	//Required Functions for all Game Objects
 	virtual void update(float deltaTime) = 0;
 	virtual void draw() = 0;
 };

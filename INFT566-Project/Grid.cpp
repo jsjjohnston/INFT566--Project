@@ -4,14 +4,17 @@
 
 Grid::Grid()
 {
+	// Set Default
 	glm::mat4 view = glm::lookAt(glm::vec3(10, 10, 10), glm::vec3(0), glm::vec3(0, 1, 0));
 	glm::mat4 projection = glm::perspective(glm::pi<float>() * 0.25f,
 		16 / 9.f, 0.1f, 1000.f);	m_projectionView = projection * view;
+	Gizmos::create();
 }
 
 
 Grid::~Grid()
 {
+	Gizmos::destroy();
 }
 
 const glm::mat4 Grid::getProjectionView()
@@ -22,16 +25,6 @@ const glm::mat4 Grid::getProjectionView()
 void Grid::setProjectionView(const glm::mat4 a_projectionView)
 {
 	m_projectionView = a_projectionView;
-}
-
-void Grid::startup()
-{
-	Gizmos::create();
-}
-
-void Grid::shutdown()
-{
-	Gizmos::destroy();
 }
 
 void Grid::update(float deltaTime)
