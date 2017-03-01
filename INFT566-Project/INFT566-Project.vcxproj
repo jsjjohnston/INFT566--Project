@@ -119,7 +119,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;GLM_FORCE_PURE;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;GLM_FORCE_PURE;DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Program Files (x86)\Visual Leak Detector\include;$(SolutionDir)include\;$(SolutionDir)include\glfw;$(SolutionDir)include\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -212,6 +212,9 @@
     <ClCompile Include="..\include\AIE\Gizmos.cpp" />
     <ClCompile Include="..\include\GLM\gl_core_4_4.c" />
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Cameras.cpp" />
+    <ClCompile Include="FlyCamera.cpp" />
+    <ClCompile Include="GameOBJ.cpp" />
     <ClCompile Include="Glslprogram.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Project.cpp" />
@@ -223,6 +226,9 @@
     <ClInclude Include="..\include\Catch\catch.hpp" />
     <ClInclude Include="..\include\GLM\gl_core_4_4.h" />
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Cameras.h" />
+    <ClInclude Include="FlyCamera.h" />
+    <ClInclude Include="GameOBJ.h" />
     <ClInclude Include="Glslprogram.h" />
     <ClInclude Include="Project.h" />
     <ClInclude Include="TimeManager.h" />

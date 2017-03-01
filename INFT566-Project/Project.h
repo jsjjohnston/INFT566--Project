@@ -1,5 +1,11 @@
 #pragma once
 #include "Application.h"
+#include "GLM\glm.hpp"
+#include "GLM\fwd.hpp"
+
+#ifdef DEBUG
+	#include "FlyCamera.h"
+#endif // DEBUG
 
 /*
 	NOTE Ensure Header is Correct
@@ -18,5 +24,9 @@ public:
 protected:
 
 private:
+#ifdef DEBUG
+	FlyCamera* m_flyCamera;
+#endif // DEBUG
+
 };
 

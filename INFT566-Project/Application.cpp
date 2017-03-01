@@ -111,7 +111,7 @@ void Application::run(const char * a_title, int a_width, int a_height, bool a_fu
 		// Check if time Manager hasnt been initailised
 		if (TimeManager::getInstance() == nullptr)
 		{
-			std::cout << "Time Manage has not been initialised" << std::endl;
+			std::cout << "Time Manager has not been initialised" << std::endl;
 			TimeManager::create();
 		}
 
