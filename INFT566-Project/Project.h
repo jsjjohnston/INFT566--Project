@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "GLM\glm.hpp"
 #include "GLM\fwd.hpp"
+#include "Grid.h"
 
 #ifdef DEBUG
 	#include "FlyCamera.h"
@@ -28,5 +29,6 @@ private:
 	FlyCamera* m_flyCamera;
 #endif // DEBUG
 
+	Grid* m_grid;
 };
 

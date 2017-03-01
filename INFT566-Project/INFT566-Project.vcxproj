@@ -216,6 +216,7 @@
     <ClCompile Include="FlyCamera.cpp" />
     <ClCompile Include="GameOBJ.cpp" />
     <ClCompile Include="Glslprogram.cpp" />
+    <ClCompile Include="Grid.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Project.cpp" />
     <ClCompile Include="testCase.cpp" />
@@ -230,6 +231,7 @@
     <ClInclude Include="FlyCamera.h" />
     <ClInclude Include="GameOBJ.h" />
     <ClInclude Include="Glslprogram.h" />
+    <ClInclude Include="Grid.h" />
     <ClInclude Include="Project.h" />
     <ClInclude Include="TimeManager.h" />
   </ItemGroup>

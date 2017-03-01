@@ -126,13 +126,20 @@ void Application::run(const char * a_title, int a_width, int a_height, bool a_fu
 			if (glfwGetWindowAttrib(m_window, GLFW_ICONIFIED) != 0)
 				continue;
 			
+			//Update Application assests
 			update(float(TimeManager::getInstance()->getDeltaTime()));
 			
+			//Draw application assests
+			draw();
+
 			//present backbuffer to the monitor
 			glfwSwapBuffers(m_window);
 
 			// Should the game exit?
-			m_isGameOver = m_isGameOver || glfwWindowShouldClose(m_window) == GLFW_TRUE;
+			if (glfwWindowShouldClose(m_window) == GLFW_TRUE || glfwGetKey(m_window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+			{
+				m_isGameOver = true;
+			}
 		}
 
 		// Clean up when game is over
