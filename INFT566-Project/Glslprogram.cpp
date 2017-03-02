@@ -47,7 +47,7 @@ GLSLProgram::~GLSLProgram()
 	delete[] shaderNames;
 }
 
-void GLSLProgram::complieShader(const char * fileName)
+void GLSLProgram::compileShader(const char * fileName)
 {
 	int numExts = sizeof(extensions) / sizeof(shader_file_extension);
 

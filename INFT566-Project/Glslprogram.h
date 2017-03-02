@@ -31,7 +31,7 @@ public:
 	GLSLProgram();
 	~GLSLProgram();
 
-	void complieShader(const char* fileName);
+	void compileShader(const char* fileName);
 	void compileShader(const char* filename, GLSLShaderType type);
 	void compileShader(const char* source, GLSLShaderType type, const char* filename);
 	void link();

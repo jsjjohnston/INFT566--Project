@@ -3,6 +3,7 @@
 Project::Project(): m_grid(nullptr)
 {
 	mdlder = new ModelLoader();
+	program = new GLSLProgram();
 }
 
 
@@ -21,8 +22,16 @@ bool Project::startup()
 	// Set Background Colour
 	setClearColour(1.0f,0.25f,0.25f);
 	clearScreen();
+	
+	program->compileShader("myShader.vert");
+	program->compileShader("myShader.frag");
+	program->link();
+	program->validate();
+	program->use();
 
-	mdlder->loadModel("./Models/Buddha.obj");
+	program->setUniform("projectionViewWorldMatrix", m_grid->getProjectionView());
+
+	mdlder->loadModel("./Models/Bunny.obj");
 
 	return true;
 }

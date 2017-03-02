@@ -4,6 +4,7 @@
 #include "GLM\fwd.hpp"
 #include "Grid.h"
 #include "ModelLoader.h"
+#include "Glslprogram.h"
 
 #ifdef DEBUG
 	#include "FlyCamera.h"
@@ -28,5 +29,6 @@ protected:
 private:
 	ModelLoader* mdlder; //TODO Remove
 	Grid* m_grid;
+	GLSLProgram* program;
 };
 
