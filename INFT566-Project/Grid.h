@@ -3,6 +3,8 @@
 #include "AIE\Gizmos.h" // NOTE Should be convered to use openGL AIE Gemoerty 
 #include "GLM\glm.hpp" // Math Libary 
 #include "GLM\ext.hpp"
+#include "Primitives\Vertex.h"
+#include "gl_core_4_4.h"
 
 /*
 	NOTE ensure Correct Header Grid
@@ -27,5 +29,7 @@ public:
 
 private:
 	glm::mat4 m_projectionView;
+	Vertex* aoVertices;
+	unsigned int* auiIndices;
 };
 

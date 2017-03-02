@@ -3,7 +3,7 @@
 #include <Catch\catch.hpp>
 #include "TimeManager.h"
 #include <GLFW\glfw3.h>
-#include "Model.h"
+#include "ModelLoader.h"
 
 
 TEST_CASE("Create", "[TimeManager]")
@@ -27,9 +27,12 @@ TEST_CASE("UpdateDeltaTime", "[TimeManager]")
 	glfwTerminate();
 }
 
-TEST_CASE("Model", "[TinyOBJ]")
+TEST_CASE("ModelLoader", "[TinyOBJ]")
 {
-	auto model = new Model();
+	auto modelLoader = new ModelLoader();
+	REQUIRE(modelLoader->loadModel("asddasda") == false);
+
+	REQUIRE(modelLoader->loadModel("./Models/Bunny.obj") == true);
 }
 
 #endif // CATCH_CONFIG_MAIN
