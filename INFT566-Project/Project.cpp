@@ -2,7 +2,7 @@
 
 Project::Project(): m_grid(nullptr)
 {
-	
+	mdlder = new ModelLoader();
 }
 
 
@@ -21,6 +21,8 @@ bool Project::startup()
 	// Set Background Colour
 	setClearColour(1.0f,0.25f,0.25f);
 	clearScreen();
+
+	mdlder->loadModel("./Models/Buddha.obj");
 
 	return true;
 }
@@ -41,4 +43,5 @@ void Project::update(float deltaTime)
 void Project::draw()
 {
 	m_grid->draw();
+	mdlder->draw();
 }

@@ -5,34 +5,11 @@
 #include <GLFW\glfw3.h>
 #include "ModelLoader.h"
 
-
-TEST_CASE("Create", "[TimeManager]")
+TEST_CASE("Main", "[Project]")
 {
-	REQUIRE(TimeManager::m_instance == nullptr);
-	TimeManager::create();
-	REQUIRE(TimeManager::m_instance != nullptr);
-}
-
-TEST_CASE("UpdateDeltaTime", "[TimeManager]")
-{
-	// Initialise glfwInit
-	glfwInit();
-	TimeManager::create();
-	REQUIRE(TimeManager::getInstance()->getDeltaTime() == 0.0f);
-	TimeManager::getInstance()->updateDeltaTime();
-	REQUIRE(TimeManager::getInstance()->getDeltaTime() != 0.0f);
-	float time = TimeManager::getInstance()->getDeltaTime();
-	TimeManager::getInstance()->updateDeltaTime();
-	REQUIRE_FALSE(TimeManager::getInstance()->getDeltaTime() == time);
-	glfwTerminate();
-}
-
-TEST_CASE("ModelLoader", "[TinyOBJ]")
-{
-	auto modelLoader = new ModelLoader();
-	REQUIRE(modelLoader->loadModel("asddasda") == false);
-
-	REQUIRE(modelLoader->loadModel("./Models/Bunny.obj") == true);
+	auto app = new Project();
+	app->run("AIE", 1280, 720, false);
+	delete app;
 }
 
 #endif // CATCH_CONFIG_MAIN
