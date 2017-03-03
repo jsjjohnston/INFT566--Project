@@ -61,7 +61,8 @@ bool ModelLoader::loadModel(const char * a_fileName)
 			{
 				tinyobj::index_t idx = shape.mesh.indices[index + i];
 
-				OBJVertex vertex;				
+				OBJVertex vertex;
+				
 				//Collect Positions
 				vertex.position.x = attribs.vertices[3 * idx.vertex_index + 0];
 				vertex.position.y = attribs.vertices[3 * idx.vertex_index + 1];

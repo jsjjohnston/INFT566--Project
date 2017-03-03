@@ -4,6 +4,7 @@ Project::Project(): m_grid(nullptr)
 {
 	mdlder = new ModelLoader();
 	program = new GLSLProgram();
+	cam = new Camera();
 }
 
 
@@ -28,10 +29,17 @@ bool Project::startup()
 	program->link();
 	program->validate();
 	program->use();
+	
+	glm::mat4 modelTransform = glm::translate(glm::vec3(0.0f, 0.0f, 0.0f));
+	glm::mat4 projection = glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f);
 
-	program->setUniform("projectionViewWorldMatrix", m_grid->getProjectionView());
+	//program->setUniform("projectionViewWorldMatrix", projection * cam->getWorldToViewMatrix() * modelTransform);
+	program->setUniform("modelTransform", modelTransform);
+	program->setUniform("projection", projection);
 
 	mdlder->loadModel("./Models/Bunny.obj");
+
+	cam->setWindow(m_window);
 
 	return true;
 }
@@ -45,12 +53,31 @@ void Project::update(float deltaTime)
 {
 	//Clear Screen
 	clearScreen();
+	
+	static float x = 0.0f;
+	static float y = 0.0f;
+	static float z = 0.0f;
+
+	if (glfwGetKey(m_window, GLFW_KEY_SPACE) == GLFW_PRESS)
+	{
+		//x++;
+		//y++;
+		z--;
+	}
+
+	glm::mat4 fullFransform =	glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f) * 
+								cam->getWorldToViewMatrix() *
+								glm::translate(glm::vec3(x, y, z));
+
+	program->setUniform("fullFransform", fullFransform);
+
+	cam->update(deltaTime);
 
 	m_grid->update(deltaTime);
 }
 
 void Project::draw()
 {
-	m_grid->draw();
+	//m_grid->draw();
 	mdlder->draw();
 }

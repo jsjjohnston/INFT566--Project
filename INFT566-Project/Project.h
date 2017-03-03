@@ -5,10 +5,7 @@
 #include "Grid.h"
 #include "ModelLoader.h"
 #include "Glslprogram.h"
-
-#ifdef DEBUG
-	#include "FlyCamera.h"
-#endif // DEBUG
+#include "Camera.h" //TODO check if this is still required
 
 /*
 	NOTE Ensure Header is Correct
@@ -30,5 +27,6 @@ private:
 	ModelLoader* mdlder; //TODO Remove
 	Grid* m_grid;
 	GLSLProgram* program;
+	Camera* cam;
 };
 

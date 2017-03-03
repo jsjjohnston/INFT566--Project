@@ -120,9 +120,6 @@ void Application::run(const char * a_title, int a_width, int a_height, bool a_fu
 			
 			TimeManager::getInstance()->updateDeltaTime();
 
-			// Update window events
-			glfwPollEvents();
-
 			if (glfwGetWindowAttrib(m_window, GLFW_ICONIFIED) != 0)
 				continue;
 			
@@ -134,6 +131,9 @@ void Application::run(const char * a_title, int a_width, int a_height, bool a_fu
 
 			//present backbuffer to the monitor
 			glfwSwapBuffers(m_window);
+
+			// Update window events
+			glfwPollEvents();
 
 			// Should the game exit?
 			if (glfwWindowShouldClose(m_window) == GLFW_TRUE || glfwGetKey(m_window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
