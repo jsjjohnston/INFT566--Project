@@ -21,6 +21,13 @@ private:
 	const glm::vec3 up;
 	glm::vec2 oldMousePosition;
 
+	void moveForward(float a_deltaTime);
+	void moveBackward(float a_deltaTime);
+	void strafeLeft(float a_deltaTime);
+	void strafeRight(float a_deltaTime);
+	void moveUp(float a_deltaTime);
+	void moveDown(float a_deltaTime);
+
 	GLFWwindow* m_window;
 };
 
