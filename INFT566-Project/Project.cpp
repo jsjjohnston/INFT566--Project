@@ -41,6 +41,9 @@ bool Project::startup()
 
 	cam->setWindow(m_window);
 
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+
 	return true;
 }
 

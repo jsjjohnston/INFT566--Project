@@ -72,27 +72,6 @@ void Camera::update(float deltaTime)
 	{
 		moveDown(deltaTime);
 	}
-
-
-
-
-	//TODO REMOVE switch (glfwGetKey(m_window, GLFW_KEY_SPACE))
-	//{
-	//case GLFW_KEY_W:
-	//	break;
-	//case GLFW_KEY_S:
-	//	break;
-	//case GLFW_KEY_A:
-	//	break;
-	//case GLFW_KEY_D:
-	//	break;
-	//case GLFW_KEY_R:
-	//	break;
-	//case GLFW_KEY_F:
-	//	break;
-	//default:
-	//	break;
-	//}
 }
 
 void Camera::moveForward(float a_deltaTime)
