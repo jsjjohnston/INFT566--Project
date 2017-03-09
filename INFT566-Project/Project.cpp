@@ -36,13 +36,16 @@ bool Project::startup()
 	//program->setUniform("projectionViewWorldMatrix", projection * cam->getWorldToViewMatrix() * modelTransform);
 	program->setUniform("modelTransform", modelTransform);
 	program->setUniform("projection", projection);
+	
+	glm::vec3 ambientLight(0.1f,0.1f,0.1f);
+	program->setUniform("ambientLight", ambientLight);
 
 	mdlder->loadModel("./Models/Bunny.obj");
 
 	cam->setWindow(m_window);
 
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
+	glEnable(GL_CULL_FACE); // Only render triangles facing the Cam
 
 	return true;
 }

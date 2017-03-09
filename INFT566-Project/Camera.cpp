@@ -88,14 +88,14 @@ void Camera::strafeLeft(float a_deltaTime)
 {
 
 	glm::vec3 strafeDirection = glm::cross(viewDirection, up);
-	position += MOVEMENT_SPEED * a_deltaTime * strafeDirection;
+	position += -MOVEMENT_SPEED * a_deltaTime * strafeDirection;
 
 }
 
 void Camera::strafeRight(float a_deltaTime)
 {
 	glm::vec3 strafeDirection = glm::cross(viewDirection, up);
-	position += -MOVEMENT_SPEED * a_deltaTime * strafeDirection;
+	position += MOVEMENT_SPEED * a_deltaTime * strafeDirection;
 }
 
 void Camera::moveUp(float a_deltaTime)
