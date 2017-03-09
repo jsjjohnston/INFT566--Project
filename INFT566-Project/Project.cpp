@@ -40,7 +40,7 @@ bool Project::startup()
 	glm::vec3 ambientLight(0.1f,0.1f,0.1f);
 	program->setUniform("ambientLight", ambientLight);
 
-	mdlder->loadModel("./Models/Bunny.obj");
+	mdlder->loadModel("./Models/Lucy.obj");
 
 	cam->setWindow(m_window);
 
@@ -62,7 +62,7 @@ void Project::update(float deltaTime)
 	
 	static float x = 0.0f;
 	static float y = 0.0f;
-	static float z = 0.0f;
+	static float z = -10.0f;
 
 	if (glfwGetKey(m_window, GLFW_KEY_SPACE) == GLFW_PRESS)
 	{
