@@ -19,7 +19,7 @@ bool ModelLoader::loadModel(const char * a_fileName)
 	std::vector<tinyobj::material_t> materials;
 	std::string err; // Errors Warning Messages
 
-	bool success = tinyobj::LoadObj(&attribs, &shapes, &materials, &err, a_fileName);
+	bool success = tinyobj::LoadObj(&attribs, &shapes, &materials, &err, a_fileName, "");
 
 	/*
 		Err could contain warning messages

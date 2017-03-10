@@ -47,7 +47,7 @@ bool Project::startup()
 
 	program->setUniform("modelToWorldTransformMatrix", modelTransform);
 
-	mdlder->loadModel("./Models/Lucy.obj");
+	mdlder->loadModel("soulspear.obj");
 
 	cam->setWindow(m_window);
 
