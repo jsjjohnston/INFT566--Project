@@ -1,7 +1,7 @@
 #include "Texture.h"
 
 #define STB_IMAGE_IMPLEMENTATION
-#include <stb_image.h>
+#include <stb\stb_image.h>
 
 Texture::Texture(): m_filename(""), m_width(0), m_height(0),m_glHandle(0),m_format(0),m_loadedPixels(nullptr)
 {
@@ -23,5 +23,8 @@ bool Texture::load(const char * a_fileName)
 		m_height = 0;
 		m_filename = "";
 	}
-	return false;
+
+	m_loadedPixels = stbi_load(a_fileName,&m_width,&m_height,&m_format,STBI_default);
+
+	return true;
 }
