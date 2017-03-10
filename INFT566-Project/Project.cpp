@@ -40,6 +40,11 @@ bool Project::startup()
 	glm::vec3 ambientLight(0.1f,0.1f,0.1f);
 	program->setUniform("ambientLight", ambientLight);
 
+	glm::vec3 lightPosition(0.0f,3.0f,0.0f);
+	program->setUniform("lightPosition", lightPosition);
+
+	program->setUniform("modelToWorldTransformMatrix", modelTransform);
+
 	mdlder->loadModel("./Models/Lucy.obj");
 
 	cam->setWindow(m_window);
@@ -66,16 +71,18 @@ void Project::update(float deltaTime)
 
 	if (glfwGetKey(m_window, GLFW_KEY_SPACE) == GLFW_PRESS)
 	{
-		//x++;
-		//y++;
+		//x--;
+		//y--;
+		
 		z--;
 	}
 
+	glm::mat4 modelTransform = glm::translate(glm::vec3(x, y, z));// * glm::rotate(1.0f, glm::vec3(x,y,z));
 	glm::mat4 fullFransform =	glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f) * 
-								cam->getWorldToViewMatrix() *
-								glm::translate(glm::vec3(x, y, z));
+								cam->getWorldToViewMatrix() * modelTransform;
 
 	program->setUniform("fullFransform", fullFransform);
+	program->setUniform("modelToWorldTransformMatrix", modelTransform);
 
 	cam->update(deltaTime);
 
