@@ -37,8 +37,10 @@ bool Project::startup()
 	program->setUniform("modelTransform", modelTransform);
 	program->setUniform("projection", projection);
 	
-	glm::vec3 ambientLight(0.1f,0.1f,0.1f);
+	glm::vec4 ambientLight(0.1f,0.1f,0.1f,1.0f);
 	program->setUniform("ambientLight", ambientLight);
+
+	
 
 	glm::vec3 lightPosition(0.0f,3.0f,0.0f);
 	program->setUniform("lightPositionWorld", lightPosition);
@@ -77,12 +79,21 @@ void Project::update(float deltaTime)
 		z--;
 	}
 
+	if (glfwGetKey(m_window, GLFW_KEY_B) == GLFW_PRESS)
+	{
+		//x--;
+		//y--;
+
+		z++;
+	}
+
 	glm::mat4 modelTransform = glm::translate(glm::vec3(x, y, z));// * glm::rotate(1.0f, glm::vec3(x,y,z));
 	glm::mat4 fullFransform =	glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f) * 
 								cam->getWorldToViewMatrix() * modelTransform;
 
 	program->setUniform("modelToProjectionMatrix", fullFransform);
 	program->setUniform("modelToWorldTransformMatrix", modelTransform);
+	program->setUniform("eyePositionWorld", cam->getPosition());
 
 	cam->update(deltaTime);
 

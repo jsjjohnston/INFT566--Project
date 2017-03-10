@@ -15,6 +15,8 @@ public:
 
 	void update(float deltaTime);
 
+	glm::vec3 getPosition() const { return position; };
+
 private:
 	glm::vec3 viewDirection;
 	glm::vec3 position;
