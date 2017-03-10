@@ -41,7 +41,7 @@ bool Project::startup()
 	program->setUniform("ambientLight", ambientLight);
 
 	glm::vec3 lightPosition(0.0f,3.0f,0.0f);
-	program->setUniform("lightPosition", lightPosition);
+	program->setUniform("lightPositionWorld", lightPosition);
 
 	program->setUniform("modelToWorldTransformMatrix", modelTransform);
 
@@ -81,7 +81,7 @@ void Project::update(float deltaTime)
 	glm::mat4 fullFransform =	glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f) * 
 								cam->getWorldToViewMatrix() * modelTransform;
 
-	program->setUniform("fullFransform", fullFransform);
+	program->setUniform("modelToProjectionMatrix", fullFransform);
 	program->setUniform("modelToWorldTransformMatrix", modelTransform);
 
 	cam->update(deltaTime);
