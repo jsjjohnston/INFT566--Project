@@ -4,7 +4,6 @@
 #include "TimeManager.h"
 #include <GLFW\glfw3.h>
 #include "ModelLoader.h"
-#include "Texture.h"
 
 TEST_CASE("Main", "[Project]")
 {
@@ -14,10 +13,5 @@ TEST_CASE("Main", "[Project]")
 
 }
 
-TEST_CASE("Load", "[Textures]")
-{
-	auto tex = new Texture();
-	REQUIRE(tex->load("soulspear_diffuse.tga") == true);
-}
 #endif // CATCH_CONFIG_MAIN
 

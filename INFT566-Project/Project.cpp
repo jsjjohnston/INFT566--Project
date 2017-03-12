@@ -1,5 +1,8 @@
 #include "Project.h"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb\stb_image.h>
+
 Project::Project(): m_grid(nullptr)
 {
 	mdlder = new ModelLoader();
