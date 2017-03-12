@@ -37,6 +37,8 @@ bool ModelLoader::loadModel(const char * a_fileName)
 	std::cout << "# of Shapes    : " << shapes.size() << std::endl;
 	std::cout << "# of Materials : " << materials.size() << std::endl;
 
+	std::cout << "# of Texcoords : " << attribs.texcoords.size() << std::endl;
+
 	m_glInfo.resize(shapes.size());
 
 	// For Each Shape

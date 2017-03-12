@@ -27,15 +27,15 @@ bool Project::startup()
 	setClearColour(1.0f,0.25f,0.25f);
 	clearScreen();
 	
-	// Image Data
+	// Image Data //TODO Get [Texturing] Working
 	int imageWidth = 0;
 	int imageHeight = 0;
 	int imageFormat = 0;
 
-	// Get Image Data
+	// Get Image Data //TODO Get [Texturing] Working
 	unsigned char* data = stbi_load("soulspear_diffuse.tga", &imageWidth, &imageHeight, &imageFormat, STBI_default);
 
-	// Load Image data on to the GFX card
+	// Load Image data on to the GFX card //TODO Get [Texturing] Working
 	glGenTextures(1, &m_texture);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imageWidth, imageHeight,	0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -44,7 +44,7 @@ bool Project::startup()
 	stbi_image_free(data); // Free Image Data
 
 	program->compileShader("myShader.vert");
-	program->compileShader("myShader.frag");
+	program->compileShader("phong.frag");
 	program->link();
 	program->validate();
 	program->use();
@@ -111,7 +111,12 @@ void Project::update(float deltaTime)
 	program->setUniform("modelToProjectionMatrix", fullFransform);
 	program->setUniform("modelToWorldTransformMatrix", modelTransform);
 
-	glActiveTexture(GL_TEXTURE0);	glBindTexture(GL_TEXTURE_2D, m_texture);	int loc = glGetUniformLocation(program->handle, "diffuse");	glUniform1i(loc, 0);
+	
+	program->setUniform("camPos", cam->getPosition());
+	program->setUniform("L", glm::vec3(0,3,0));
+
+	//TODO Get [Texturing] Working
+	glActiveTexture(GL_TEXTURE0);	glBindTexture(GL_TEXTURE_2D, m_texture);	int loc = glGetUniformLocation(program->getHandle(), "diffuse");	glUniform1i(loc, 0);
 
 	cam->update(deltaTime);
 
