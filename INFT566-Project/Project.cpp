@@ -59,8 +59,6 @@ bool Project::startup()
 	glm::vec4 ambientLight(0.1f,0.1f,0.1f,1.0f);
 	program->setUniform("ambientLight", ambientLight);
 
-	
-
 	glm::vec3 lightPosition(0.0f,3.0f,0.0f);
 	program->setUniform("lightPositionWorld", lightPosition);
 
@@ -112,7 +110,8 @@ void Project::update(float deltaTime)
 
 	program->setUniform("modelToProjectionMatrix", fullFransform);
 	program->setUniform("modelToWorldTransformMatrix", modelTransform);
-	//program->setUniform("eyePositionWorld", cam->getPosition());
+
+	glActiveTexture(GL_TEXTURE0);	glBindTexture(GL_TEXTURE_2D, m_texture);	int loc = glGetUniformLocation(program->handle, "diffuse");	glUniform1i(loc, 0);
 
 	cam->update(deltaTime);
 

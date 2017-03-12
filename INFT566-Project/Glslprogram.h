@@ -55,11 +55,11 @@ public:
 	void setUniform(const char* name, bool val);
 	void setUniform(const char* name, unsigned int val);
 
+	int handle;
 
 protected:
 
 private:
-	int handle;
 	bool linked;
 	std::map<std::string, int> uniformLocations;
 
