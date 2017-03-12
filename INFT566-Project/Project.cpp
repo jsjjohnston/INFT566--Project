@@ -112,7 +112,7 @@ void Project::update(float deltaTime)
 
 	program->setUniform("modelToProjectionMatrix", fullFransform);
 	program->setUniform("modelToWorldTransformMatrix", modelTransform);
-	program->setUniform("eyePositionWorld", cam->getPosition());
+	//program->setUniform("eyePositionWorld", cam->getPosition());
 
 	cam->update(deltaTime);
 
