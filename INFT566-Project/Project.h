@@ -28,5 +28,7 @@ private:
 	Grid* m_grid;
 	GLSLProgram* program;
 	Camera* cam;
+
+	unsigned int m_texture;
 };
 
