@@ -27,9 +27,12 @@ bool Project::startup()
 	setClearColour(1.0f,0.25f,0.25f);
 	clearScreen();
 	
+	// Image Data
 	int imageWidth = 0;
 	int imageHeight = 0;
 	int imageFormat = 0;
+
+	unsigned char* data = stbi_load("soulspear_diffuse.tga", &imageWidth, &imageHeight, &imageFormat, STBI_default);
 
 	program->compileShader("myShader.vert");
 	program->compileShader("myShader.frag");
