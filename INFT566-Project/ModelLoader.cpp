@@ -106,6 +106,8 @@ bool ModelLoader::loadModel(const char * a_fileName)
 		glBindVertexArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		shapeIndex++;
+
+
 	}
 
 	return success;

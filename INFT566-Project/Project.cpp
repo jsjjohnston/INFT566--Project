@@ -45,6 +45,7 @@ bool Project::startup()
 
 	program->compileShader("myShader.vert");
 	program->compileShader("phong.frag");
+	//program->compileShader("texture.frag");
 	program->link();
 	program->validate();
 	program->use();
@@ -110,10 +111,9 @@ void Project::update(float deltaTime)
 
 	program->setUniform("modelToProjectionMatrix", fullFransform);
 	program->setUniform("modelToWorldTransformMatrix", modelTransform);
-
 	
-	program->setUniform("camPos", cam->getPosition());
-	program->setUniform("L", glm::vec3(0,3,0));
+	program->setUniform("camPos", cam->getPosition()); // Camera position
+	program->setUniform("L", glm::vec3(0,3,-1)); // Light Direction
 
 	//TODO Get [Texturing] Working
 	glActiveTexture(GL_TEXTURE0);	glBindTexture(GL_TEXTURE_2D, m_texture);	int loc = glGetUniformLocation(program->getHandle(), "diffuse");	glUniform1i(loc, 0);
