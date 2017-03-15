@@ -32,5 +32,6 @@ void main()
 	
 	float specTerm = pow(min(0.0f, dot(R,E)),iSpecPower);
 	vec3 Specular = kS * iS * specTerm;
-	FragColor = texture(diffuseTex,vTexCoord) * vec4(Ambient+Diffuse+Specular,1);
+	//FragColor = texture(diffuseTex,vTexCoord) * vec4(Ambient+Diffuse+Specular,1);
+	FragColor = texture(diffuseTex,vTexCoord);
 }

@@ -81,9 +81,8 @@ bool ModelLoader::loadModel(const char * a_fileName)
 				//Collect texture coordinates
 				if (attribs.texcoords.size() > 0)
 				{
-
 					vertex.u = attribs.texcoords[2 * idx.texcoord_index + 0]; 
-					vertex.v = attribs.texcoords[2 * idx.texcoord_index + 1];
+					vertex.v = -attribs.texcoords[2 * idx.texcoord_index + 1];
 				}
 				vertices.push_back(vertex);
 			}

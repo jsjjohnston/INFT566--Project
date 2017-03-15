@@ -40,7 +40,8 @@ bool Project::startup()
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imageWidth, imageHeight,	0, GL_RGB, GL_UNSIGNED_BYTE, data);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
 	stbi_image_free(data); // Free Image Data
 
 	program->compileShader("myShader.vert");
@@ -116,7 +117,10 @@ void Project::update(float deltaTime)
 	program->setUniform("L", glm::vec3(0,3,-1)); // Light Direction
 
 	//TODO Get [Texturing] Working
-	glActiveTexture(GL_TEXTURE0);	glBindTexture(GL_TEXTURE_2D, m_texture);	int loc = glGetUniformLocation(program->getHandle(), "diffuse");	glUniform1i(loc, 0);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, m_texture);
+	int loc = glGetUniformLocation(program->getHandle(), "diffuse");
+	glUniform1i(loc, 0);
 
 	cam->update(deltaTime);
 
