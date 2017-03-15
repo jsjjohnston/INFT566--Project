@@ -1,20 +1,12 @@
 #version 430
 
-uniform vec3 kA = vec3(1,0,0); // Red Ambient Material Colour
-uniform vec3 kD = vec3(1,0,0); // Red Diffuse Material Colour
-uniform vec3 kS = vec3(1,0,0); // Red Specular Material Colour
-
-uniform vec3 iA = vec3(0.25f,0.25f,0.25f);
-uniform vec3 iD = vec3(1,1,1);
-uniform vec3 iS = vec3(1,1,1);
-uniform float iSpecPower = 32.0f; // Specular Power
-
 in vec3 normalWorld; // Normalised surface normal from mesh
 in vec3 vertexPositionWorld; // World-space surface position from mesh
 in vec2 vTexCoord;
 
-uniform vec3 camPos; // World-space Camera Position
-uniform vec3 L; // Normalised Light direction
+uniform vec3 eyePositionWorld; // World-space Camera Position
+uniform vec3 lightPositionWorld; // Normalised Light direction
+uniform vec4 ambientLight;
 
 uniform sampler2D diffuseTex;
 
@@ -22,16 +14,19 @@ out vec4 FragColor;
 
 void main()
 {
-	vec3 Ambient = kA * iA; // Set Ambient Light
+	// diffuse
+	vec3 lightVectorWorld = normalize(lightPositionWorld - vertexPositionWorld);
+	float brightness = dot(lightVectorWorld, normalize(normalWorld));
+	vec4 diffuse = texture(diffuseTex,vTexCoord);
+	vec4 diffuseLight = vec4(diffuse.r * brightness, diffuse.g * brightness, diffuse.b * brightness, 1.0);
 	
-	float Ndl = max(0.0f, dot(normalWorld, -L)); //Lambert term
-	vec3 Diffuse = kD *iD * Ndl; // Diffuse Light for one Light
+	// Specular
+	vec3 reflectedLightVectorWorld = reflect(-lightVectorWorld, normalWorld);
+	vec3 eyeVectorWorld = normalize(eyePositionWorld - vertexPositionWorld);
+	float s = clamp(dot(reflectedLightVectorWorld, eyeVectorWorld), 0, 1);
+	s = pow(s, 50);
+	vec4 specularLight = vec4(s, 0, 0, 1);
 	
-	vec3 R = reflect(L, normalWorld);
-	vec3 E = normalize(camPos - vertexPositionWorld);
-	
-	float specTerm = pow(min(0.0f, dot(R,E)),iSpecPower);
-	vec3 Specular = kS * iS * specTerm;
 	//FragColor = texture(diffuseTex,vTexCoord) * vec4(Ambient+Diffuse+Specular,1);
-	FragColor = texture(diffuseTex,vTexCoord);
+	FragColor = ambientLight + clamp(diffuseLight, 0, 1) + specularLight;
 }

@@ -113,8 +113,10 @@ void Project::update(float deltaTime)
 	program->setUniform("modelToProjectionMatrix", fullFransform);
 	program->setUniform("modelToWorldTransformMatrix", modelTransform);
 	
-	program->setUniform("camPos", cam->getPosition()); // Camera position
-	program->setUniform("L", glm::vec3(0,3,-1)); // Light Direction
+	program->setUniform("eyePositionWorld", cam->getPosition()); // Camera position
+	program->setUniform("lightPositionWorld", glm::vec3(0,3,-1)); // Light Direction
+	program->setUniform("ambientLight", glm::vec4(0.05f, 0.05f, 0.05f, 1.0f)); // Light Direction
+
 
 	//TODO Get [Texturing] Working
 	glActiveTexture(GL_TEXTURE0);
