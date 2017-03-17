@@ -7,7 +7,6 @@ layout (location=2) in vec2 texCoord;
 layout (location=3) in vec4 quadPosition;
 layout (location=4) in vec2 quadTexCoord;
 
-
 uniform mat4 modelToProjectionMatrix;
 uniform mat4 modelToWorldTransformMatrix;
 
@@ -22,8 +21,10 @@ void main()
 	fquadTexCoord = quadTexCoord;
 
 	vTexCoord = texCoord;
-	gl_Position = modelToProjectionMatrix * vec4(VertexPositionModel, 1.0) * quadPosition;
-	//gl_Position = modelToProjectionMatrix * vec4(VertexPositionModel, 1.0);
+	//gl_Position = modelToProjectionMatrix * vec4(VertexPositionModel, 1.0) * quadPosition;
+	gl_Position = modelToProjectionMatrix * vec4(VertexPositionModel, 1.0);
 	normalWorld = vec3(modelToWorldTransformMatrix * vec4(normalModel,0));
 	vertexPositionWorld = vec3(modelToWorldTransformMatrix * vec4(VertexPositionModel, 1.0));	
+	
+	//gl_Position = quadPosition;
 }

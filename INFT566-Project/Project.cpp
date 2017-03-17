@@ -6,7 +6,7 @@
 Project::Project(): m_grid(nullptr)
 {
 	mdlder = new ModelLoader();
-	program = new GLSLProgram();
+	phongProgram = new GLSLProgram();
 	cam = new Camera();
 }
 
@@ -44,27 +44,27 @@ bool Project::startup()
 
 	stbi_image_free(data); // Free Image Data
 
-	program->compileShader("myShader.vert");
-	program->compileShader("phong.frag");
-	//program->compileShader("texture.frag");
-	program->link();
-	program->validate();
-	program->use();
+	phongProgram->compileShader("myShader.vert");
+	phongProgram->compileShader("phong.frag");
+	//phongProgram->compileShader("texture.frag");
+	phongProgram->link();
+	phongProgram->validate();
+	phongProgram->use();
 	
 	glm::mat4 modelTransform = glm::translate(glm::vec3(0.0f, 0.0f, 0.0f));
 	glm::mat4 projection = glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f);
 
-	//program->setUniform("projectionViewWorldMatrix", projection * cam->getWorldToViewMatrix() * modelTransform);
-	program->setUniform("modelTransform", modelTransform);
-	program->setUniform("projection", projection);
+	//phongProgram->setUniform("projectionViewWorldMatrix", projection * cam->getWorldToViewMatrix() * modelTransform);
+	phongProgram->setUniform("modelTransform", modelTransform);
+	phongProgram->setUniform("projection", projection);
 	
 	glm::vec4 ambientLight(0.1f,0.1f,0.1f,1.0f);
-	program->setUniform("ambientLight", ambientLight);
+	phongProgram->setUniform("ambientLight", ambientLight);
 
 	glm::vec3 lightPosition(0.0f,3.0f,0.0f);
-	program->setUniform("lightPositionWorld", lightPosition);
+	phongProgram->setUniform("lightPositionWorld", lightPosition);
 
-	program->setUniform("modelToWorldTransformMatrix", modelTransform);
+	phongProgram->setUniform("modelToWorldTransformMatrix", modelTransform);
 
 	mdlder->loadModel("soulspear.obj");
 
@@ -75,7 +75,6 @@ bool Project::startup()
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE); // Only render triangles facing the Cam
-
 
 	return true;
 }
@@ -88,7 +87,6 @@ void Project::shutdown()
 void Project::update(float deltaTime)
 {
 	//Clear Screen
-	clearScreen();
 	
 	static float x = 0.0f;
 	static float y = 0.0f;
@@ -98,7 +96,6 @@ void Project::update(float deltaTime)
 	{
 		//x--;
 		//y--;
-		
 		z--;
 	}
 
@@ -106,7 +103,6 @@ void Project::update(float deltaTime)
 	{
 		//x--;
 		//y--;
-
 		z++;
 	}
 
@@ -114,18 +110,18 @@ void Project::update(float deltaTime)
 	glm::mat4 fullFransform =	glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f) * 
 								cam->getWorldToViewMatrix() * modelTransform;
 
-	program->setUniform("modelToProjectionMatrix", fullFransform);
-	program->setUniform("modelToWorldTransformMatrix", modelTransform);
+	phongProgram->setUniform("modelToProjectionMatrix", fullFransform);
+	phongProgram->setUniform("modelToWorldTransformMatrix", modelTransform);
 	
-	program->setUniform("eyePositionWorld", cam->getPosition()); // Camera position
-	program->setUniform("lightPositionWorld", glm::vec3(0,3,-1)); // Light Direction
-	program->setUniform("ambientLight", glm::vec4(0.05f, 0.05f, 0.05f, 1.0f)); // Light Direction
+	phongProgram->setUniform("eyePositionWorld", cam->getPosition()); // Camera position
+	phongProgram->setUniform("lightPositionWorld", glm::vec3(0,3,-1)); // Light Direction
+	phongProgram->setUniform("ambientLight", glm::vec4(0.05f, 0.05f, 0.05f, 1.0f)); // Light Direction
 
 
 	//TODO Get [Texturing] Working
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
-	int loc = glGetUniformLocation(program->getHandle(), "diffuse");
+	int loc = glGetUniformLocation(phongProgram->getHandle(), "diffuse");
 	glUniform1i(loc, 0);
 
 	cam->update(deltaTime);
@@ -135,35 +131,52 @@ void Project::update(float deltaTime)
 
 void Project::draw()
 {
-	
-	//glBindFramebuffer(GL_FRAMEBUFFER, m_frameBufferObject);
-	//glViewport(0, 0, getWindowWidth(), getWindowHeight());
+	glBindFramebuffer(GL_FRAMEBUFFER, m_frameBufferObject);
+	glViewport(0, 0, getWindowWidth(), getWindowHeight());
 	
 	// clear the target
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	clearScreen();
+	
+	phongProgram->use();
 	mdlder->draw();
 
-	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	//glViewport(0, 0, getWindowWidth(), getWindowHeight());
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glViewport(0, 0, getWindowWidth(), getWindowHeight());
 
-	//glActiveTexture(GL_TEXTURE1);
-	//glBindTexture(GL_TEXTURE_2D, m_frameBufferObjectTexture);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, m_frameBufferObjectTexture);
 	
-	//int loc = glGetUniformLocation(program->getHandle(), "target");
-	//glUniform1i(loc, 1);	//glBindVertexArray(m_vao);
-	//glDrawArrays(GL_TRIANGLES, 0, 6);
+	int loc = glGetUniformLocation(phongProgram->getHandle(), "target");
+	glUniform1i(loc, 1);
+
+	glBindVertexArray(m_vao);
+	glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
 void Project::setUpFrameBuffer()
 {
-	glGenFramebuffers(1, &m_frameBufferObject);
-	glBindFramebuffer(GL_FRAMEBUFFER, m_frameBufferObject);
+	glGenFramebuffers(1, &m_frameBufferObject); //  Generate framebuffer object names
+	glBindFramebuffer(GL_FRAMEBUFFER, m_frameBufferObject); // Bind a framebuffer to a framebuffer target
 
-	glGenTextures(1,&m_frameBufferObjectTexture);
-	glBindTexture(GL_TEXTURE_2D, m_frameBufferObjectTexture);
+	// Craete a new Texture
+	glGenTextures(1,&m_frameBufferObjectTexture); // Generate texture names
+	glBindTexture(GL_TEXTURE_2D, m_frameBufferObjectTexture); // Bind a named texture to a texturing target
+	
+	/*
+		Simultaneously specify storage for all levels of a two-dimensional or one-dimensional array texture
+		https://www.khronos.org/opengl/wiki/GLAPI/glTexStorage2D
+	*/
 	glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, getWindowWidth(), getWindowHeight());
+	
+	/*
+		Set texture parameters
+	*/
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,GL_NEAREST);	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, m_frameBufferObjectTexture, 0);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,GL_NEAREST);
+
+	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, m_frameBufferObjectTexture, 0);
+
 	glGenRenderbuffers(1, &m_frameBufferObjectDepth);
 	glBindRenderbuffer(GL_RENDERBUFFER, m_frameBufferObjectDepth);
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, getWindowWidth(), getWindowHeight());
@@ -184,7 +197,8 @@ void Project::createFullScreenQuad()
 		-1, -1, 0, 1, halfTexel.x, halfTexel.y,
 		1, -1, 0, 1, 1 - halfTexel.x, halfTexel.y,
 		1, 1, 0, 1, 1 - halfTexel.x, 1 - halfTexel.y,
-	};
+	};
+
 	glGenVertexArrays(1, &m_vao);
 	glBindVertexArray(m_vao);
 
@@ -192,11 +206,11 @@ void Project::createFullScreenQuad()
 	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 6, vertexData, GL_STATIC_DRAW);
 
-	glEnableVertexAttribArray(3);
-	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE,
-		sizeof(float) * 6, 0);
-	glEnableVertexAttribArray(4);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE,	sizeof(float) * 6, 0);
+	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE,	sizeof(float) * 6, ((char*)0) + 16);
 	glBindVertexArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
 }

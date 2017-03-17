@@ -38,4 +38,5 @@ void main()
 	
 	//FragColor = texture(diffuseTex,vTexCoord) * vec4(Ambient+Diffuse+Specular,1);
 	FragColor = ambientLight + clamp(diffuseLight, 0, 1) + specularLight + Sample();
+	//FragColor = Sample();
 }

@@ -29,7 +29,7 @@ protected:
 private:
 	ModelLoader* mdlder; //TODO Remove
 	Grid* m_grid;
-	GLSLProgram* program;
+	GLSLProgram* phongProgram;
 	Camera* cam;
 
 	unsigned int m_texture;
