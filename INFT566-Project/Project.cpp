@@ -5,7 +5,6 @@ Project::Project(): m_grid(nullptr)
 	m_model = new Model();
 	phongProgram = new GLSLProgram();
 	cam = new Camera();
-
 	postProgram = new GLSLProgram();
 }
 
@@ -13,6 +12,9 @@ Project::Project(): m_grid(nullptr)
 Project::~Project()
 {
 	delete m_grid;
+	delete postProgram;
+	delete cam;
+	delete phongProgram;
 }
 
 bool Project::startup()
@@ -23,7 +25,7 @@ bool Project::startup()
 	TimeManager::create();
 	
 	// Set Background Colour
-	setClearColour(1.0f,0.25f,0.25f);
+	setClearColour(0.25f,0.25f,0.25f);
 	clearScreen();
 	
 	// Compile Phong Shaders
@@ -46,12 +48,12 @@ bool Project::startup()
 	cam->setOriginalMousePos();
 	
 	// Setup Model
-	m_model->loadModel("soulspear.obj");
+	m_model->loadModel("Handgun.obj");
 	m_model->setProgram(phongProgram);
 	m_model->setCamera(cam);
 	m_model->setWindow(m_window);
-	m_model->setPostion(glm::vec3(0, 0, -15));
-	m_model->loadDiffuseTexture("soulspear_diffuse.tga");
+	m_model->setPostion(glm::vec3(0, 0, -5));
+	m_model->loadDiffuseTexture("Handgun.jpg");
 
 	// Setup fram Buffer
 	setUpFrameBuffer();
@@ -70,7 +72,7 @@ void Project::shutdown()
 
 void Project::update(float deltaTime)
 {
-	phongProgram->setUniform("lightPositionWorld", glm::vec3(0,3,-1)); // Light Direction
+	phongProgram->setUniform("lightPositionWorld", glm::vec3(0,6,-5)); // Light Direction
 	phongProgram->setUniform("ambientLight", glm::vec4(0.05f, 0.05f, 0.05f, 1.0f));
 
 	cam->update(deltaTime);

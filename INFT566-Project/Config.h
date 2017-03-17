@@ -35,4 +35,4 @@
 /*
 	Model Roatation Speed
 */
-#define DEFAULT_MODEL_ROTATION 0.05f
+#define DEFAULT_MODEL_ROTATION 0.005f

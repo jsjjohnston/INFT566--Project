@@ -25,7 +25,7 @@ void main()
 	vec3 eyeVectorWorld = normalize(eyePositionWorld - vertexPositionWorld);
 	float s = clamp(dot(reflectedLightVectorWorld, eyeVectorWorld), 0, 1);
 	s = pow(s, 50);
-	vec4 specularLight = vec4(s, 0, 0, 1);
+	vec4 specularLight = vec4(s, s, s, 1);
 	
 	//FragColor = texture(diffuseTex,vTexCoord) * vec4(Ambient+Diffuse+Specular,1);
 	FragColor = ambientLight + clamp(diffuseLight, 0, 1) + specularLight;
