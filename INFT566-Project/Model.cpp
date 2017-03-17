@@ -112,6 +112,10 @@ bool Model::loadModel(const char * a_fileName)
 	return success;
 }
 
+void Model::update(float a_deltaTime)
+{
+}
+
 void Model::draw()
 {
 	for (auto& gl : m_glInfo)

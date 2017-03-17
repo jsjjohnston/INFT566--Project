@@ -32,6 +32,7 @@ public:
 	Model();
 	~Model();
 	bool loadModel(const char* a_fileName);
+	void update(float a_deltaTime);
 	void draw();
 
 private:
