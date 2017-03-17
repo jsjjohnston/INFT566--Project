@@ -20,7 +20,11 @@ void Camera::mouseUpdate(const glm::vec2& newMousePos, const float a_deltaTime)
 	if (glm::length(mouseDelta) > MOUSE_SENSITIVITY)
 	{
 		glm::vec3 rorateAround = glm::cross(viewDirection, up);
-		glm::mat4 rotator = glm::rotate(-mouseDelta.x * MOUSE_ROTATIONAL_SPEED * a_deltaTime, up) * glm::rotate(-mouseDelta.y * MOUSE_ROTATIONAL_SPEED * a_deltaTime, rorateAround);
+		glm::mat4 rotator;
+		if (INVERTED_CAMERA)
+			rotator = glm::rotate(-mouseDelta.x * MOUSE_ROTATIONAL_SPEED * a_deltaTime, up) * glm::rotate(-mouseDelta.y * MOUSE_ROTATIONAL_SPEED * a_deltaTime, rorateAround);
+		else
+			rotator = glm::rotate(mouseDelta.x * MOUSE_ROTATIONAL_SPEED * a_deltaTime, up) * glm::rotate(mouseDelta.y * MOUSE_ROTATIONAL_SPEED * a_deltaTime, rorateAround);
 		
 		viewDirection =  glm::mat3(rotator) * viewDirection;
 		

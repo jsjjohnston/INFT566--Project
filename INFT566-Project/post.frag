@@ -37,6 +37,6 @@ return texture(target, newCoord);
 }
 
 void main() {
-fragColour = BoxBlur();
-//fragColour = Distort();
+//fragColour = BoxBlur();
+fragColour = Distort();
 }

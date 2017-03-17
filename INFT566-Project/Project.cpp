@@ -125,8 +125,9 @@ void Project::update(float deltaTime)
 	
 	phongProgram->setUniform("eyePositionWorld", cam->getPosition()); // Camera position
 	phongProgram->setUniform("lightPositionWorld", glm::vec3(0,3,-1)); // Light Direction
-	phongProgram->setUniform("ambientLight", glm::vec4(0.05f, 0.05f, 0.05f, 1.0f)); // Light Direction
+	phongProgram->setUniform("ambientLight", glm::vec4(0.05f, 0.05f, 0.05f, 1.0f));
 
+	cam->update(deltaTime);
 
 	//TODO Get [Texturing] Working
 	glActiveTexture(GL_TEXTURE0);
@@ -134,7 +135,6 @@ void Project::update(float deltaTime)
 	int loc = glGetUniformLocation(phongProgram->getHandle(), "diffuse");
 	glUniform1i(loc, 0);
 
-	cam->update(deltaTime);
 
 	m_grid->update(deltaTime);
 }
