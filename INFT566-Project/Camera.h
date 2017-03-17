@@ -17,11 +17,19 @@ public:
 
 	glm::vec3 getPosition() const { return position; };
 
+	void setOriginalMousePos() 
+	{
+		double x, y;
+		glfwGetCursorPos(m_window, &x, &y);
+		orignalMousePosition = glm::vec2(x, y);
+	}
+
+
 private:
 	glm::vec3 viewDirection;
 	glm::vec3 position;
 	const glm::vec3 up;
-	glm::vec2 oldMousePosition;
+	glm::vec2 orignalMousePosition;
 
 	void moveForward(float a_deltaTime);
 	void moveBackward(float a_deltaTime);
