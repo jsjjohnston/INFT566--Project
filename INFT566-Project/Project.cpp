@@ -131,27 +131,27 @@ void Project::update(float deltaTime)
 
 void Project::draw()
 {
-	glBindFramebuffer(GL_FRAMEBUFFER, m_frameBufferObject);
-	glViewport(0, 0, getWindowWidth(), getWindowHeight());
+	//glBindFramebuffer(GL_FRAMEBUFFER, m_frameBufferObject);
+	//glViewport(0, 0, getWindowWidth(), getWindowHeight());
 	
 	// clear the target
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	clearScreen();
 	
-	phongProgram->use();
+	//phongProgram->use();
 	mdlder->draw();
 
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glViewport(0, 0, getWindowWidth(), getWindowHeight());
+	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	//glViewport(0, 0, getWindowWidth(), getWindowHeight());
 
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, m_frameBufferObjectTexture);
+	//glActiveTexture(GL_TEXTURE0);
+	//glBindTexture(GL_TEXTURE_2D, m_frameBufferObjectTexture);
 	
-	int loc = glGetUniformLocation(phongProgram->getHandle(), "target");
-	glUniform1i(loc, 1);
+	//int loc = glGetUniformLocation(phongProgram->getHandle(), "target");
+	//glUniform1i(loc, 1);
 
-	glBindVertexArray(m_vao);
-	glDrawArrays(GL_TRIANGLES, 0, 6);
+	//glBindVertexArray(m_vao);
+	//glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
 void Project::setUpFrameBuffer()

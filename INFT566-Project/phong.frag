@@ -12,15 +12,6 @@ uniform sampler2D diffuseTex;
 
 out vec4 FragColor;
 
-in vec2 fquadTexCoord;
-
-uniform sampler2D target;
-
-vec4 Sample()
-{
-	return texture(target, fquadTexCoord); 
-}
-
 void main()
 {
 	// diffuse
@@ -37,6 +28,6 @@ void main()
 	vec4 specularLight = vec4(s, 0, 0, 1);
 	
 	//FragColor = texture(diffuseTex,vTexCoord) * vec4(Ambient+Diffuse+Specular,1);
-	FragColor = ambientLight + clamp(diffuseLight, 0, 1) + specularLight + Sample();
+	FragColor = ambientLight + clamp(diffuseLight, 0, 1) + specularLight;
 	//FragColor = Sample();
 }
