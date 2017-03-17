@@ -1,8 +1,11 @@
 #pragma once
+
+#include "Config.h"
+#include "Glslprogram.h"
+
 #include <GLM\glm.hpp>
 #include <GLM\gtx\transform.hpp>
 #include "GLFW\glfw3.h"
-#include "Config.h"
 
 class Camera
 {
@@ -21,6 +24,9 @@ public:
 
 	void setOriginalMousePos();
 
+	GLSLProgram* getProgram() const { return m_program; };
+	void setProgram(GLSLProgram* a_program) { m_program = a_program;};
+
 private:
 	glm::vec3 viewDirection;
 	glm::vec3 position;
@@ -35,5 +41,6 @@ private:
 	void moveDown(float a_deltaTime);
 
 	GLFWwindow* m_window;
+	GLSLProgram* m_program;
 };
 

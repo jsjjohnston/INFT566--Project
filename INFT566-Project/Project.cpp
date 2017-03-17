@@ -78,6 +78,7 @@ bool Project::startup()
 	mdlder->loadModel("soulspear.obj");
 
 	cam->setWindow(m_window);
+	cam->setProgram(phongProgram);
 	cam->setOriginalMousePos();
 
 	setUpFrameBuffer();
