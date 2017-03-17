@@ -26,11 +26,11 @@ struct OpenGLInfo
 	GLuint m_faceCount;
 };
 
-class ModelLoader
+class Model
 {
 public:
-	ModelLoader();
-	~ModelLoader();
+	Model();
+	~Model();
 	bool loadModel(const char* a_fileName);
 	void draw();
 

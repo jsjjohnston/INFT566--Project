@@ -5,7 +5,7 @@
 
 Project::Project(): m_grid(nullptr)
 {
-	mdlder = new ModelLoader();
+	mdlder = new Model();
 	phongProgram = new GLSLProgram();
 	cam = new Camera();
 

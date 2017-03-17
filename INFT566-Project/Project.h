@@ -3,7 +3,7 @@
 #include "GLM\glm.hpp"
 #include "GLM\fwd.hpp"
 #include "Grid.h"
-#include "ModelLoader.h"
+#include "Model.h"
 #include "Glslprogram.h"
 #include "Camera.h" //TODO check if this is still required
 
@@ -27,7 +27,7 @@ public:
 protected:
 
 private:
-	ModelLoader* mdlder; //TODO Remove
+	Model* mdlder; //TODO Remove
 	Grid* m_grid;
 	GLSLProgram* phongProgram;
 	GLSLProgram* postProgram;
