@@ -70,6 +70,7 @@ bool Project::startup()
 	mdlder->setProgram(phongProgram);
 	mdlder->setCamera(cam);
 	mdlder->setWindow(m_window);
+	mdlder->setPostion(glm::vec3(0, 0, -15));
 
 	setUpFrameBuffer();
 	createFullScreenQuad();

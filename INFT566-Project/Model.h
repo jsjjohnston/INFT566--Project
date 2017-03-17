@@ -51,10 +51,15 @@ public:
 	GLSLProgram* getProgram() const { return m_program; };
 	void setProgram(GLSLProgram* a_program) { m_program = a_program; };
 
+	glm::vec3 getPostion() const { return m_position; };
+	void setPostion(glm::vec3 a_postion) { m_position = a_postion; };
+
 private:
 	std::vector<OpenGLInfo> m_glInfo;
 	Camera* m_camera;
 	GLFWwindow* m_window;
 	GLSLProgram* m_program;
+
+	glm::vec3 m_position;
 };
 
