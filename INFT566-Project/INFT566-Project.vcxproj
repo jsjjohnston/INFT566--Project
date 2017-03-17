@@ -229,6 +229,7 @@
     <ClInclude Include="..\include\GLM\gl_core_4_4.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Config.h" />
     <ClInclude Include="GameOBJ.h" />
     <ClInclude Include="Glslprogram.h" />
     <ClInclude Include="Grid.h" />

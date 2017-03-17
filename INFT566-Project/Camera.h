@@ -2,6 +2,8 @@
 #include <GLM\glm.hpp>
 #include <GLM\gtx\transform.hpp>
 #include "GLFW\glfw3.h"
+#include "Config.h"
+
 class Camera
 {
 public:
@@ -17,13 +19,7 @@ public:
 
 	glm::vec3 getPosition() const { return position; };
 
-	void setOriginalMousePos() 
-	{
-		double x, y;
-		glfwGetCursorPos(m_window, &x, &y);
-		orignalMousePosition = glm::vec2(x, y);
-	}
-
+	void setOriginalMousePos();
 
 private:
 	glm::vec3 viewDirection;
