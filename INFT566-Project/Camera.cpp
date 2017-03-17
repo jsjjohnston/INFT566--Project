@@ -39,6 +39,8 @@ glm::mat4 Camera::getWorldToViewMatrix() const
 
 void Camera::update(float deltaTime)
 {
+	m_program->setUniform("eyePositionWorld", getPosition()); // Camera position
+
 	glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
 	//Manage Mouse Movement

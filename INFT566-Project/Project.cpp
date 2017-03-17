@@ -124,7 +124,6 @@ void Project::update(float deltaTime)
 	phongProgram->setUniform("modelToProjectionMatrix", fullFransform);
 	phongProgram->setUniform("modelToWorldTransformMatrix", modelTransform);
 	
-	phongProgram->setUniform("eyePositionWorld", cam->getPosition()); // Camera position
 	phongProgram->setUniform("lightPositionWorld", glm::vec3(0,3,-1)); // Light Direction
 	phongProgram->setUniform("ambientLight", glm::vec4(0.05f, 0.05f, 0.05f, 1.0f));
 
