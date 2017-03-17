@@ -61,5 +61,6 @@ private:
 	GLSLProgram* m_program;
 
 	glm::vec3 m_position;
+	float m_rotation;
 };
 

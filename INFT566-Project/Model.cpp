@@ -2,7 +2,7 @@
 
 
 
-Model::Model(): m_position(0)
+Model::Model(): m_position(0), m_rotation(0)
 {
 }
 
@@ -115,12 +115,14 @@ bool Model::loadModel(const char * a_fileName)
 void Model::update(float a_deltaTime)
 {
 	if (glfwGetKey(m_window, GLFW_KEY_SPACE) == GLFW_PRESS)
-		m_position.z--;
+		m_position.z -= DEFAULT_MODEL_MOVMENT + a_deltaTime;
 
 	if (glfwGetKey(m_window, GLFW_KEY_B) == GLFW_PRESS)
-		m_position.z++;
+		m_position.z += DEFAULT_MODEL_MOVMENT + a_deltaTime;
 
-	glm::mat4 modelTransform = glm::translate(glm::vec3(m_position.x, m_position.y, m_position.z));// * glm::rotate(1.0f, glm::vec3(x,y,z));
+	m_rotation += DEFAULT_MODEL_ROTATION + a_deltaTime;
+
+	glm::mat4 modelTransform = glm::translate(m_position) * glm::rotate(m_rotation, glm::vec3(0,1,0));
 	glm::mat4 fullFransform = glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f) *	m_camera->getWorldToViewMatrix() * modelTransform;
 
 	m_program->setUniform("modelToProjectionMatrix", fullFransform);

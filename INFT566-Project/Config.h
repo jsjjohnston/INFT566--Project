@@ -26,3 +26,13 @@
 	(To be used as a Bool)
 */
 #define INVERTED_CAMERA true
+
+/*
+	Model Movement Speed
+*/
+#define DEFAULT_MODEL_MOVMENT 0.5f
+
+/*
+	Model Roatation Speed
+*/
+#define DEFAULT_MODEL_ROTATION 0.05f
