@@ -60,26 +60,27 @@ bool Project::startup()
 	postProgram->link();
 	postProgram->validate();
 
-	glm::mat4 modelTransform = glm::translate(glm::vec3(0.0f, 0.0f, 0.0f));
-	glm::mat4 projection = glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f);
+	//glm::mat4 modelTransform = glm::translate(glm::vec3(0.0f, 0.0f, 0.0f));
+	//glm::mat4 projection = glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f);
 
-	//phongProgram->setUniform("projectionViewWorldMatrix", projection * cam->getWorldToViewMatrix() * modelTransform);
-	phongProgram->setUniform("modelTransform", modelTransform);
-	phongProgram->setUniform("projection", projection);
-	
-	glm::vec4 ambientLight(0.1f,0.1f,0.1f,1.0f);
-	phongProgram->setUniform("ambientLight", ambientLight);
+	////phongProgram->setUniform("projectionViewWorldMatrix", projection * cam->getWorldToViewMatrix() * modelTransform);
+	//phongProgram->setUniform("modelTransform", modelTransform);
+	//phongProgram->setUniform("projection", projection);
+	//
+	//glm::vec4 ambientLight(0.1f,0.1f,0.1f,1.0f);
+	//phongProgram->setUniform("ambientLight", ambientLight);
 
-	glm::vec3 lightPosition(0.0f,3.0f,0.0f);
-	phongProgram->setUniform("lightPositionWorld", lightPosition);
+	//glm::vec3 lightPosition(0.0f,3.0f,0.0f);
+	//phongProgram->setUniform("lightPositionWorld", lightPosition);
 
-	phongProgram->setUniform("modelToWorldTransformMatrix", modelTransform);
+	//phongProgram->setUniform("modelToWorldTransformMatrix", modelTransform);
 
-	mdlder->loadModel("soulspear.obj");
 
 	cam->setWindow(m_window);
 	cam->setProgram(phongProgram);
 	cam->setOriginalMousePos();
+	
+	mdlder->loadModel("soulspear.obj");
 
 	setUpFrameBuffer();
 	createFullScreenQuad();
