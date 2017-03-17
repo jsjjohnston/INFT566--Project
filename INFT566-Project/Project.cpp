@@ -2,7 +2,7 @@
 
 Project::Project(): m_grid(nullptr)
 {
-	mdlder = new Model();
+	m_model = new Model();
 	phongProgram = new GLSLProgram();
 	cam = new Camera();
 
@@ -46,12 +46,12 @@ bool Project::startup()
 	cam->setOriginalMousePos();
 	
 	// Setup Model
-	mdlder->loadModel("soulspear.obj");
-	mdlder->setProgram(phongProgram);
-	mdlder->setCamera(cam);
-	mdlder->setWindow(m_window);
-	mdlder->setPostion(glm::vec3(0, 0, -15));
-	mdlder->loadDiffuseTexture("soulspear_diffuse.tga");
+	m_model->loadModel("soulspear.obj");
+	m_model->setProgram(phongProgram);
+	m_model->setCamera(cam);
+	m_model->setWindow(m_window);
+	m_model->setPostion(glm::vec3(0, 0, -15));
+	m_model->loadDiffuseTexture("soulspear_diffuse.tga");
 
 	// Setup fram Buffer
 	setUpFrameBuffer();
@@ -74,7 +74,7 @@ void Project::update(float deltaTime)
 	phongProgram->setUniform("ambientLight", glm::vec4(0.05f, 0.05f, 0.05f, 1.0f));
 
 	cam->update(deltaTime);
-	mdlder->update(deltaTime);
+	m_model->update(deltaTime);
 	m_grid->update(deltaTime);
 }
 
@@ -88,7 +88,7 @@ void Project::draw()
 	clearScreen();
 	
 	//phongProgram->use();
-	mdlder->draw();
+	m_model->draw();
 	
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glViewport(0, 0, getWindowWidth(), getWindowHeight());

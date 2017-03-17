@@ -27,7 +27,7 @@ public:
 protected:
 
 private:
-	Model* mdlder; //TODO Remove
+	Model* m_model; //TODO Remove
 	Grid* m_grid;
 	GLSLProgram* phongProgram;
 	GLSLProgram* postProgram;
