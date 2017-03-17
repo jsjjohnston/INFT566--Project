@@ -60,20 +60,6 @@ bool Project::startup()
 	postProgram->link();
 	postProgram->validate();
 
-	//glm::mat4 modelTransform = glm::translate(glm::vec3(0.0f, 0.0f, 0.0f));
-	//glm::mat4 projection = glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f);
-
-	////phongProgram->setUniform("projectionViewWorldMatrix", projection * cam->getWorldToViewMatrix() * modelTransform);
-	//phongProgram->setUniform("modelTransform", modelTransform);
-	//phongProgram->setUniform("projection", projection);
-	//
-	//glm::vec4 ambientLight(0.1f,0.1f,0.1f,1.0f);
-	//phongProgram->setUniform("ambientLight", ambientLight);
-
-	//glm::vec3 lightPosition(0.0f,3.0f,0.0f);
-	//phongProgram->setUniform("lightPositionWorld", lightPosition);
-
-	//phongProgram->setUniform("modelToWorldTransformMatrix", modelTransform);
 
 
 	cam->setWindow(m_window);
@@ -81,6 +67,8 @@ bool Project::startup()
 	cam->setOriginalMousePos();
 	
 	mdlder->loadModel("soulspear.obj");
+	mdlder->setCamera(cam);
+	mdlder->setWindow(m_window);
 
 	setUpFrameBuffer();
 	createFullScreenQuad();
@@ -104,7 +92,6 @@ void Project::update(float deltaTime)
 	static float y = 0.0f;
 	static float z = -10.0f;
 
-	mdlder->update(deltaTime);
 
 	if (glfwGetKey(m_window, GLFW_KEY_SPACE) == GLFW_PRESS)
 	{
@@ -139,6 +126,7 @@ void Project::update(float deltaTime)
 	glUniform1i(loc, 0);
 
 
+	mdlder->update(deltaTime);
 	m_grid->update(deltaTime);
 }
 

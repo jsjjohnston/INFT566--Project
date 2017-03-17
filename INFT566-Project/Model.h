@@ -5,6 +5,7 @@
 
 //Jay
 #include "Camera.h"
+#include "Glslprogram.h"
 
 //Other
 #include "tiny_obj_loader.h"
@@ -43,12 +44,17 @@ public:
 
 	Camera* getCamera() const { return m_camera; };
 	void setCamera(Camera* a_camera) { m_camera = a_camera; };
+
 	GLFWwindow* getWindow() const { return m_window; };
 	void setWindow(GLFWwindow* a_window) { m_window = a_window; };
+
+	GLSLProgram* getProgram() const { return m_program; };
+	void setProgram(GLSLProgram* a_program) { m_program = a_program; };
 
 private:
 	std::vector<OpenGLInfo> m_glInfo;
 	Camera* m_camera;
 	GLFWwindow* m_window;
+	GLSLProgram* m_program;
 };
 
