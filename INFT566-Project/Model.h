@@ -41,6 +41,8 @@ public:
 	bool loadModel(const char* a_fileName);
 	void update(float a_deltaTime);
 	void draw();
+	void loadDiffuseTexture(const char* a_fileName);
+
 
 	Camera* getCamera() const { return m_camera; };
 	void setCamera(Camera* a_camera) { m_camera = a_camera; };
@@ -59,6 +61,8 @@ private:
 	Camera* m_camera;
 	GLFWwindow* m_window;
 	GLSLProgram* m_program;
+
+	unsigned int m_DiffuseTexture;
 
 	glm::vec3 m_position;
 	float m_rotation;

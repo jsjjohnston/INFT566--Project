@@ -1,6 +1,7 @@
 #include "Model.h"
 
-
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb\stb_image.h>
 
 Model::Model(): m_position(0), m_rotation(0)
 {
@@ -105,8 +106,6 @@ bool Model::loadModel(const char * a_fileName)
 		glBindVertexArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		shapeIndex++;
-
-
 	}
 
 	return success;
@@ -127,6 +126,12 @@ void Model::update(float a_deltaTime)
 
 	m_program->setUniform("modelToProjectionMatrix", fullFransform);
 	m_program->setUniform("modelToWorldTransformMatrix", modelTransform);
+
+	//TODO Get [Texturing] Working
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, m_DiffuseTexture);
+	int loc = glGetUniformLocation(m_program->getHandle(), "diffuse");
+	glUniform1i(loc, 0);
 }
 
 void Model::draw()
@@ -136,4 +141,24 @@ void Model::draw()
 		glBindVertexArray(gl.m_VAO);
 		glDrawArrays(GL_TRIANGLES, 0, gl.m_faceCount * 3);
 	}
+}
+
+void Model::loadDiffuseTexture(const char* a_fileName)
+{
+	// Image Data //TODO Get [Texturing] Working
+	int imageWidth = 0;
+	int imageHeight = 0;
+	int imageFormat = 0;
+
+	// Get Image Data //TODO Get [Texturing] Working
+	unsigned char* data = stbi_load(a_fileName, &imageWidth, &imageHeight, &imageFormat, STBI_default);
+
+	// Load Image data on to the GFX card //TODO Get [Texturing] Working
+	glGenTextures(1, &m_DiffuseTexture);
+	glBindTexture(GL_TEXTURE_2D, m_DiffuseTexture);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imageWidth, imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+	stbi_image_free(data); // Free Image Data
 }
