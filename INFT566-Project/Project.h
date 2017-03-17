@@ -30,6 +30,7 @@ private:
 	ModelLoader* mdlder; //TODO Remove
 	Grid* m_grid;
 	GLSLProgram* phongProgram;
+	GLSLProgram* postProgram;
 	Camera* cam;
 
 	unsigned int m_texture;
