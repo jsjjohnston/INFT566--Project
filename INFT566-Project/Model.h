@@ -1,7 +1,13 @@
 #pragma once
-#include "tiny_obj_loader.h"
+//C++
 #include <iostream>
 #include <string>
+
+//Jay
+#include "Camera.h"
+
+//Other
+#include "tiny_obj_loader.h"
 #include "GLM\glm.hpp" // Math Lib
 #include "gl_core_4_4.h" // OpenGL
 
@@ -35,7 +41,10 @@ public:
 	void update(float a_deltaTime);
 	void draw();
 
+	Camera* getCamera() const { return m_camera; };
+	void setCamera(Camera* a_camera) { m_camera = a_camera; };
 private:
 	std::vector<OpenGLInfo> m_glInfo;
+	Camera* m_camera;
 };
 

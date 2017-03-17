@@ -114,6 +114,7 @@ bool Model::loadModel(const char * a_fileName)
 
 void Model::update(float a_deltaTime)
 {
+
 }
 
 void Model::draw()

@@ -103,6 +103,8 @@ void Project::update(float deltaTime)
 	static float y = 0.0f;
 	static float z = -10.0f;
 
+	mdlder->update(deltaTime);
+
 	if (glfwGetKey(m_window, GLFW_KEY_SPACE) == GLFW_PRESS)
 	{
 		//x--;
