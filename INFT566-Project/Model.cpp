@@ -114,7 +114,22 @@ bool Model::loadModel(const char * a_fileName)
 
 void Model::update(float a_deltaTime)
 {
+	static float x = 0.0f;
+	static float y = 0.0f;
+	static float z = -10.0f;
 
+	if (glfwGetKey(m_window, GLFW_KEY_SPACE) == GLFW_PRESS)
+		z--;
+
+	if (glfwGetKey(m_window, GLFW_KEY_B) == GLFW_PRESS)
+		z++;
+
+	glm::mat4 modelTransform = glm::translate(glm::vec3(x, y, z));// * glm::rotate(1.0f, glm::vec3(x,y,z));
+	glm::mat4 fullFransform = glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f) *
+		m_camera->getWorldToViewMatrix() * modelTransform;
+
+	m_program->setUniform("modelToProjectionMatrix", fullFransform);
+	m_program->setUniform("modelToWorldTransformMatrix", modelTransform);
 }
 
 void Model::draw()

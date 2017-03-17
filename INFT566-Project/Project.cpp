@@ -67,6 +67,7 @@ bool Project::startup()
 	cam->setOriginalMousePos();
 	
 	mdlder->loadModel("soulspear.obj");
+	mdlder->setProgram(phongProgram);
 	mdlder->setCamera(cam);
 	mdlder->setWindow(m_window);
 
@@ -86,34 +87,6 @@ void Project::shutdown()
 
 void Project::update(float deltaTime)
 {
-	//Clear Screen
-	
-	static float x = 0.0f;
-	static float y = 0.0f;
-	static float z = -10.0f;
-
-
-	if (glfwGetKey(m_window, GLFW_KEY_SPACE) == GLFW_PRESS)
-	{
-		//x--;
-		//y--;
-		z--;
-	}
-
-	if (glfwGetKey(m_window, GLFW_KEY_B) == GLFW_PRESS)
-	{
-		//x--;
-		//y--;
-		z++;
-	}
-
-	glm::mat4 modelTransform = glm::translate(glm::vec3(x, y, z));// * glm::rotate(1.0f, glm::vec3(x,y,z));
-	glm::mat4 fullFransform =	glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f) * 
-								cam->getWorldToViewMatrix() * modelTransform;
-
-	phongProgram->setUniform("modelToProjectionMatrix", fullFransform);
-	phongProgram->setUniform("modelToWorldTransformMatrix", modelTransform);
-	
 	phongProgram->setUniform("lightPositionWorld", glm::vec3(0,3,-1)); // Light Direction
 	phongProgram->setUniform("ambientLight", glm::vec4(0.05f, 0.05f, 0.05f, 1.0f));
 
