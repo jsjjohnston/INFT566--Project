@@ -33,12 +33,12 @@ private:
 	GLSLProgram* postProgram;
 	Camera* cam;
 
+	// For post Processing
 	unsigned int m_texture;
 	unsigned int m_frameBufferObject;
 	unsigned int m_frameBufferObjectTexture;
 	unsigned int m_frameBufferObjectDepth;
 
-	// For post Processing
 	unsigned int m_vao;
 	unsigned int m_vbo;
 };
