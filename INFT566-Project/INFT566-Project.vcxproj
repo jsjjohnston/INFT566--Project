@@ -219,6 +219,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Project.cpp" />
+    <ClCompile Include="ShapeFactory.cpp" />
     <ClCompile Include="testCase.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="tiny_obj_loader.cc" />
@@ -238,6 +239,7 @@
     <ClInclude Include="Primitives\OpenGLInfo.h" />
     <ClInclude Include="Primitives\Vertex.h" />
     <ClInclude Include="Project.h" />
+    <ClInclude Include="ShapeFactory.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="tiny_obj_loader.h" />
   </ItemGroup>
