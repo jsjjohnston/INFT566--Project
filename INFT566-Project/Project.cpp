@@ -1,56 +1,125 @@
 #include "Project.h"
 
-Project::Project(): m_grid(nullptr)
+
+Project::Project(): m_postIndex(0)
 {
 	m_model = new Model();
 	phongProgram = new GLSLProgram();
-	cam = new Camera();
-	postProgram = new GLSLProgram();
+	m_cam = new Camera();
+	
+	postBoxBlur = new GLSLProgram();
+	postDistort = new GLSLProgram();
+	postExplosion = new GLSLProgram();
+	postFog = new GLSLProgram();
+	postFuzz = new GLSLProgram();
+	postSimple = new GLSLProgram();
+	postThermal = new GLSLProgram();
+	postEdgeDetection = new GLSLProgram();
+	postFade = new GLSLProgram();
+
+	postImplosion = new GLSLProgram();
+
+	timePressed = 0;
 }
 
 
 Project::~Project()
 {
-	delete m_grid;
 	delete postProgram;
-	delete cam;
+	delete m_cam;
 	delete phongProgram;
+
+	postBoxBlur;
+	postDistort;
+	postExplosion;
+	postFog;
+	postFuzz;
+	postSimple;
+	postThermal;
+	postEdgeDetection;
+	postFade;
+
+	postImplosion = new GLSLProgram();
 }
 
 bool Project::startup()
 {
-	m_grid = new Grid();
-
 	// Setup Time Manager singleton
 	TimeManager::create();
 	
 	// Set Background Colour
-	setClearColour(0.25f,0.25f,0.25f);
+	setClearColour(1.0f,0.25f,0.25f);
 	clearScreen();
 	
 	// Compile Phong Shaders
 	phongProgram->compileShader("myShader.vert");
 	phongProgram->compileShader("phong.frag");
-	//phongProgram->compileShader("texture.frag");
 	phongProgram->link();
 	phongProgram->validate();
 	phongProgram->use();
 	
 	// Compile Post Processing Shaders
-	postProgram->compileShader("post.vert");
-	postProgram->compileShader("post.frag");
-	postProgram->link();
-	postProgram->validate();
+	postBoxBlur->compileShader("post.vert");
+	postBoxBlur->compileShader("postBoxBlur.frag");
+	postBoxBlur->link();
+	postBoxBlur->validate();
+
+	postDistort->compileShader("post.vert");
+	postDistort->compileShader("postDistort.frag");
+	postDistort->link();
+	postDistort->validate();
+
+	postExplosion->compileShader("post.vert");
+	postExplosion->compileShader("postExplosion.frag");
+	postExplosion->link();
+	postExplosion->validate();	
+
+	postImplosion->compileShader("post.vert");
+	postImplosion->compileShader("postImplosion.frag");
+	postImplosion->link();
+	postImplosion->validate();
+
+	postFog->compileShader("post.vert");
+	postFog->compileShader("postFog.frag");
+	postFog->link();
+	postFog->validate();
+
+	postFuzz->compileShader("post.vert");
+	postFuzz->compileShader("postFuzz.frag");
+	postFuzz->link();
+	postFuzz->validate();
+
+	postSimple->compileShader("post.vert");
+	postSimple->compileShader("postSimple.frag");
+	postSimple->link();
+	postSimple->validate();
+
+	postEdgeDetection->compileShader("post.vert");
+	postEdgeDetection->compileShader("postEdgeDetection.frag");
+	postEdgeDetection->link();
+	postEdgeDetection->validate();
+
+	postThermal->compileShader("post.vert");
+	postThermal->compileShader("postThermal.frag");
+	postThermal->link();
+	postThermal->validate();
+
+	postFade->compileShader("post.vert");
+	postFade->compileShader("postFade.frag");
+	postFade->link();
+	postFade->validate();
+
+	postProgram = postSimple;
 
 	// Set up cam
-	cam->setWindow(m_window);
-	cam->setProgram(phongProgram);
-	cam->setOriginalMousePos();
+	m_cam->setWindow(m_window);
+	m_cam->setProgram(phongProgram);
+	m_cam->setOriginalMousePos();
 	
 	// Setup Model
 	m_model->loadModel("Handgun.obj");
 	m_model->setProgram(phongProgram);
-	m_model->setCamera(cam);
+	m_model->setCamera(m_cam);
 	m_model->setWindow(m_window);
 	m_model->setPostion(glm::vec3(0, 0, -5));
 	m_model->loadDiffuseTexture("Handgun.jpg");
@@ -75,9 +144,64 @@ void Project::update(float deltaTime)
 	phongProgram->setUniform("lightPositionWorld", glm::vec3(0,6,-5)); // Light Direction
 	phongProgram->setUniform("ambientLight", glm::vec4(0.05f, 0.05f, 0.05f, 1.0f));
 
-	cam->update(deltaTime);
+	if (glfwGetKey(m_window, GLFW_KEY_M) == GLFW_PRESS && timePressed <= glfwGetTime())
+	{
+		m_postIndex++;
+
+		if (m_postIndex >= 10)
+		{
+			m_postIndex = 0;
+		}
+
+		switch (m_postIndex)
+		{
+		case 0:
+			postProgram = postSimple;
+			timePressed = glfwGetTime() + 1.0;
+			break;
+		case 1:
+			postProgram = postBoxBlur;
+			timePressed = glfwGetTime() + 1.0;
+			break;
+		case 2:
+			postProgram = postDistort;
+			timePressed = glfwGetTime() + 1.0;
+			break;
+		case 3:
+			postProgram = postExplosion;
+			timePressed = glfwGetTime() + 1.0;
+			break;
+		case 4:
+			postProgram = postImplosion;
+			timePressed = glfwGetTime() + 1.0;
+			break;
+		case 5:
+			postProgram = postFog;
+			timePressed = glfwGetTime() + 1.0;
+			break;
+		case 6:
+			postProgram = postFuzz;
+			timePressed = glfwGetTime() + 1.0;
+			break;
+		case 7:
+			postProgram = postThermal;
+			timePressed = glfwGetTime() + 1.0;
+			break;
+		case 8:
+			postProgram = postEdgeDetection;
+			timePressed = glfwGetTime() + 1.0;
+			break;
+		case 9:
+			postProgram = postFade;
+			timePressed = glfwGetTime() + 1.0;
+			break;
+		default:
+			break;
+		}
+	}
+
+	m_cam->update(deltaTime);
 	m_model->update(deltaTime);
-	m_grid->update(deltaTime);
 }
 
 void Project::draw()
@@ -91,7 +215,7 @@ void Project::draw()
 	
 	//phongProgram->use();
 	m_model->draw();
-	
+		
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glViewport(0, 0, getWindowWidth(), getWindowHeight());
 	

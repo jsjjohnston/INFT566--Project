@@ -93,7 +93,7 @@ bool Model::loadModel(const char * a_fileName)
 		// Bind Vertex data
 		glBindBuffer(GL_ARRAY_BUFFER, m_glInfo[shapeIndex].m_VBO);
 		glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(OBJVertex),vertices.data(), GL_STATIC_DRAW);
-		
+				
 		//Position
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(OBJVertex), 0);
@@ -127,7 +127,7 @@ void Model::update(float a_deltaTime)
 	m_program->setUniform("modelToProjectionMatrix", fullFransform);
 	m_program->setUniform("modelToWorldTransformMatrix", modelTransform);
 
-	//TODO Get [Texturing] Working
+	//Texturing
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_DiffuseTexture);
 	int loc = glGetUniformLocation(m_program->getHandle(), "diffuse");

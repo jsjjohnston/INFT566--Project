@@ -2,10 +2,9 @@
 #include "Application.h"
 #include "GLM\glm.hpp"
 #include "GLM\fwd.hpp"
-#include "Grid.h"
 #include "Model.h"
 #include "Glslprogram.h"
-#include "Camera.h" //TODO check if this is still required
+#include "Camera.h"
 
 /*
 	NOTE Ensure Header is Correct
@@ -27,11 +26,25 @@ public:
 protected:
 
 private:
-	Model* m_model; //TODO Remove
-	Grid* m_grid;
+	Model* m_model;
 	GLSLProgram* phongProgram;
 	GLSLProgram* postProgram;
-	Camera* cam;
+
+	GLSLProgram* postBoxBlur;
+	GLSLProgram* postDistort;
+	GLSLProgram* postExplosion;
+	GLSLProgram* postImplosion;
+	GLSLProgram* postEdgeDetection;
+	GLSLProgram* postFog;
+	GLSLProgram* postFuzz;
+	GLSLProgram* postSimple;
+	GLSLProgram* postThermal;
+	GLSLProgram* postFade;
+
+	Camera* m_cam;
+
+	int m_postIndex;
+	double timePressed;
 
 	// For post Processing
 	unsigned int m_texture;
