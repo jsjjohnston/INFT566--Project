@@ -117,12 +117,12 @@ bool Project::startup()
 	m_cam->setOriginalMousePos();
 	
 	// Setup Model
-	m_model->loadModel("Handgun.obj");
+	m_model->loadModel("Chair.obj");
 	m_model->setProgram(phongProgram);
 	m_model->setCamera(m_cam);
 	m_model->setWindow(m_window);
-	m_model->setPostion(glm::vec3(0, 0, -5));
-	m_model->loadDiffuseTexture("Handgun.jpg");
+	m_model->setPostion(glm::vec3(0, -5, -15));
+	m_model->loadDiffuseTexture("Wood Difuse.tga");
 
 	// Setup fram Buffer
 	setUpFrameBuffer();
