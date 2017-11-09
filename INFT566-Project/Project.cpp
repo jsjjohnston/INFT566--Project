@@ -20,6 +20,8 @@ Project::Project(): m_postIndex(0)
 	postImplosion = new GLSLProgram();
 
 	timePressed = 0;
+
+	demoMode = false;
 }
 
 
@@ -144,7 +146,8 @@ void Project::update(float deltaTime)
 	phongProgram->setUniform("lightPositionWorld", glm::vec3(0,6,-5)); // Light Direction
 	phongProgram->setUniform("ambientLight", glm::vec4(0.05f, 0.05f, 0.05f, 1.0f));
 
-	if (glfwGetKey(m_window, GLFW_KEY_M) == GLFW_PRESS && timePressed <= glfwGetTime())
+	//if (glfwGetKey(m_window, GLFW_KEY_M) == GLFW_PRESS && timePressed <= glfwGetTime())
+	if (glfwGetKey(m_window, GLFW_KEY_M) == GLFW_PRESS && timePressed <= glfwGetTime() && demoMode == false)
 	{
 		m_postIndex++;
 
@@ -200,7 +203,80 @@ void Project::update(float deltaTime)
 		}
 	}
 
-	m_cam->update(deltaTime);
+
+	// Demo Mode
+	if (glfwGetKey(m_window, GLFW_KEY_N) == GLFW_PRESS && timePressed <= glfwGetTime())
+	{
+		std::cout << "Demo Mode" << std::endl;
+		demoMode = true;
+	}
+
+	if (glfwGetKey(m_window, GLFW_KEY_C) == GLFW_PRESS)
+		system("CLS");
+	
+	
+	if (demoMode == true)
+	{
+		if (timePressed <= glfwGetTime())
+		{
+			m_postIndex++;
+			timePressed = glfwGetTime() + 5.0;
+
+			if (m_postIndex >= 10)
+				m_postIndex = 0;
+
+			switch (m_postIndex)
+			{
+			case 0:
+				postProgram = postSimple;
+				std::cout << "Shader: "<< "None" << std::endl;
+				break;
+			case 1:
+				postProgram = postBoxBlur;
+				std::cout << "Shader: " << "Box Blur" << std::endl;
+				break;
+			case 2:
+				postProgram = postDistort;
+				std::cout << "Shader: " << "Distortion" << std::endl;
+				break;
+			case 3:
+				postProgram = postExplosion;
+				std::cout << "Shader: " << "Explosion" << std::endl;
+				break;
+			case 4:
+				postProgram = postImplosion;
+				std::cout << "Shader: " << "Implosion" << std::endl;
+				break;
+			case 5:
+				postProgram = postFog;
+				std::cout << "Shader: " << "Fog" << std::endl;
+				break;
+			case 6:
+				postProgram = postFuzz;
+				std::cout << "Shader: " << "Fuzz" << std::endl;
+				break;
+			case 7:
+				postProgram = postThermal;
+				std::cout << "Shader: " << "Thermal" << std::endl;
+				break;
+			case 8:
+				postProgram = postEdgeDetection;
+				std::cout << "Shader: " << "Edge Detection" << std::endl;
+				break;
+			case 9:
+				postProgram = postFade;
+				std::cout << "Shader: " << "Fade" << std::endl;
+				break;
+			default:
+				break;
+			}
+		}
+
+	}
+
+	if (demoMode != true)
+		m_cam->update(deltaTime);
+
 	m_model->update(deltaTime);
 }
 

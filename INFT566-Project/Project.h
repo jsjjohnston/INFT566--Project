@@ -54,5 +54,7 @@ private:
 
 	unsigned int m_vao;
 	unsigned int m_vbo;
+
+	bool demoMode;
 };
 
